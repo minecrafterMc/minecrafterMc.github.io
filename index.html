@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>inscryption multiplayer ruleset editor</title>
+  
+  <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <center>
+  <h1>Main Info</h1>
+  <p>Name</p>
+  <input type="text" id="name">
+  <p>Description</p>
+  <input type="text" id="description">
+  <p>min cards in deck</p>
+  <input type="text" id="mindeck">
+  <p>Candles</p>
+  <input type="text" id="lives">
+  <p>Hammers per turn</p>
+  <input type="text" id="hammers">
+  <p>Ant limit</p>
+  <input type="text" id="maxAnts">
+  <hr>
+  <h2>I'm not sure what thease do</h2>
+  <p>Portrait</p>
+  <input type="text" id="image">
+  <p>max_commons_main</p>
+  <input type="text" id="max_commons_main">
+  <p>max_commons_side</p>
+  <input type="text" id="max_commons_side">
+  <p>variable_attack_nerf</p>
+  <input type="checkbox" id="variable_attack_nerf">
+  <p>allow_snuffing_candles</p>
+  <input type="checkbox" id="allow_snuffing_candles">
+  <p>opt_actives</p>
+  <input type="checkbox" id="opt_activities">
+  <p>enable_backrow</p>
+  <input type="checkbox" id="enable_backrow">
+  <hr>
+  <h1>Cards</h1>
+  <p>keep in mind that you need to make every card you want to have in a ruleset (only squirells are included by default)</p>
+  <div id="customCardContainer"></div>
+  <button onclick="addNewCard()">New Card</button>
+  <button onclick="removeCard()">Remove Card</button>
+  <hr>
+  
+  <!--<h1>Side Decks</h1>
+  <p>keep in mind, that you need to make a card to add it to a side deck</p>
+  <div id="customDeckContainer"></div>
+  <button onclick="addNewDeck()">New Side Deck</button>
+  <button onclick="removeDeck()">Remove Side Deck</button>
+  <hr>-->
+  <button onclick="build()">Create Ruleset</button>
+  </center>
+  <p id="output"></p>
+  <!-- Project -->
+  <script src="main.js"></script>
+</body>
+</html>
