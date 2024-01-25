@@ -190,7 +190,7 @@ function readCustomCards()
   {
     cards[i].nosac = true;
   }
-  if (document.getElementById("CardBonus" + i).value != NaN)
+  if (document.getElementById("CardBonus" + i).value != "")
   {
     cards[i] = JSON.parse(JSON.stringify(cards[i]).slice(0,-1) + "," + document.getElementById("CardBonus" + i).value + "}")
   }
