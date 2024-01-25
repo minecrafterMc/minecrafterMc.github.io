@@ -62,6 +62,11 @@ function addNewCard()
   let BannedInput = document.createElement("Input");
   BannedInput.type = "checkbox";
   BannedInput.id = "CardBanned" + customCardAmmount;
+  let BonusTitle = document.createElement("p");
+  BonusTitle.innerHTML = "bonus arguments eg. <strong>\"evolution\":\"card name\",\"nohammer\":true</strong> (leave empty for no bonus arguments)";
+  let BonusInput = document.createElement("Input");
+  BonusInput.type = "text";
+  BonusInput.id = "CardBonus" + customCardAmmount;
   
   Div.appendChild(NameTitle);
   Div.appendChild(NameInput);
@@ -83,6 +88,8 @@ function addNewCard()
   Div.appendChild(RareInput);
   Div.appendChild(BannedTitle);
   Div.appendChild(BannedInput);
+  Div.appendChild(BonusTitle);
+  Div.appendChild(BonusInput);
   
   
   Div.appendChild(document.createElement("hr"));
@@ -183,6 +190,10 @@ function readCustomCards()
   {
     cards[i].nosac = true;
   }
+  if (document.getElementById("CardBonus" + i).value != NaN)
+  {
+    cards[i] = JSON.parse(JSON.stringify(cards[i]).slice(0,-1) + "," + document.getElementById("CardBonus" + i).value + "}")
+  }
     i += 1;
   }
   cards[0] = {"name": "Squirrel","attack": 0,"health": 1,"banned": true}
@@ -217,10 +228,10 @@ function build()
   json.max_commons_main = Number(document.getElementById("max_commons_main").value);
   json.max_commons_side = Number(document.getElementById("max_commons_side").value);
   json.num_candles = Number(document.getElementById("lives").value);
-  json.variable_attack_nerf = document.getElementById("variable_attack_nerf").checked;
+  //json.variable_attack_nerf = document.getElementById("variable_attack_nerf").checked;
   json.allow_snuffing_candles = document.getElementById("allow_snuffing_candles").checked;
   json.opt_activities = document.getElementById("opt_activities").checked;
-  json.enable_backrow = document.getElementById("enable_backrow").checked;
+  //json.enable_backrow = document.getElementById("enable_backrow").checked;
   json.portrait = document.getElementById("image").value;
   json.description = document.getElementById("description").value;
   json.cards = readCustomCards();
