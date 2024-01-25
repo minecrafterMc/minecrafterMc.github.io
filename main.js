@@ -1,7 +1,7 @@
 var json = {};
 var cards = [];
 var customCardAmmount = 1;
-var customdeckcount = 0;
+var customdeckcount = 1;
 function addNewCard()
 {
   let Div = document.createElement("div");
@@ -19,15 +19,19 @@ function addNewCard()
   let AttackTitle = document.createElement("p");
   AttackTitle.innerHTML = "Card " + customCardAmmount + " Attack";
   let AttackInput = document.createElement("Input");
-  AttackInput.type = "text";
+  AttackInput.type = "number";
+  AttackInput.min = "0";
+  AttackInput.value = "0";
   AttackInput.id = "CardAttack" + customCardAmmount;
   let HealthTitle = document.createElement("p");
   HealthTitle.innerHTML = "Card " + customCardAmmount + " Health";
   let HealthInput = document.createElement("Input");
-  HealthInput.type = "text";
+  HealthInput.type = "number";
+  HealthInput.min = "1";
+  HealthInput.value = "1";
   HealthInput.id = "CardHealth" + customCardAmmount;
   let CostTitle = document.createElement("p");
-  CostTitle.innerHTML = "Card " + customCardAmmount + " Cost type (1 = blood, 2 = Bones, 3 = energy, 4 = nox)";
+  CostTitle.innerHTML = "Card " + customCardAmmount + " Cost type (1 = blood, 2 = Bones, 3 = energy, 4 = nox) (leave empty for free cards)";
   let CostInput = document.createElement("Input");
   CostInput.type = "text";
   CostInput.id = "CardCost" + customCardAmmount;
@@ -37,19 +41,21 @@ function addNewCard()
   CostAmountInput.type = "text";
   CostAmountInput.id = "CardAmountCost" + customCardAmmount;
   let SigilsTitle = document.createElement("p");
-  SigilsTitle.innerHTML = "Card " + customCardAmmount + ' Sigils (input like this: <strong>"sigil1","sigil2"</strong> eg. <strong>"winged","unkillable"</strong> or <strong>none</strong> to make a card without sigils)';
+  SigilsTitle.innerHTML = "Card " + customCardAmmount + ' Sigils (input like this: <strong>"sigil1","sigil2"</strong> eg. <strong>"airborne","unkillable"</strong> or <strong>none</strong> to make a card without sigils)';
   let SigilsInput = document.createElement("Input");
   SigilsInput.type = "text";
   SigilsInput.id = "CardSigils" + customCardAmmount;
   let NoSacTitle = document.createElement("p");
-  NoSacTitle.innerHTML = "can this card be sacrificed?";
+  NoSacTitle.innerHTML = "is this card unsacrificable?";
   let NoSacInput = document.createElement("Input");
   NoSacInput.type = "checkbox";
+  NoSacInput.class = "checkbox";
   NoSacInput.id = "CardNoSac" + customCardAmmount;
   let RareTitle = document.createElement("p");
   RareTitle.innerHTML = "is this card rare?";
   let RareInput = document.createElement("Input");
   RareInput.type = "checkbox";
+  RareInput.class = "checkbox";
   RareInput.id = "CardRare" + customCardAmmount;
   let BannedTitle = document.createElement("p");
   BannedTitle.innerHTML = "is this card banned?";
@@ -100,7 +106,9 @@ function addNewDeck()
   let DeckCardAmmountTitle = document.createElement("p");
   DeckCardAmmountTitle.innerHTML = "Deck " + customdeckcount + " card ammount";
   let DeckCardAmmountInput = document.createElement("Input");
-  DeckCardAmmountInput.type = "text";
+  DeckCardAmmountInput.type = "number";
+  DeckCardAmmountInput.min = "1";
+  DeckCardAmmountInput.value = "1";
   DeckCardAmmountInput.id = "DeckCardAmmount" + customdeckcount;
   
   Div.appendChild(DeckNameTitle);
@@ -182,19 +190,22 @@ function readCustomCards()
 }
 function readCustomDecks()
 {
-  let cards = [];
-  let i = 0;
+  let cards = "{\"10 Squirrels\": {\"type\": \"single\",\"card\": \"Squirrel\",\"count\": 10}";
+  let i = 1;
   while (i != customdeckcount)
   {
     cards[i] = {};
     i += 1;
   }
-  i = 0;
-  while (i != customCardAmmount)
+  i = 1;
+  while (i != customdeckcount)
   {
-    cards[i] = /*JSON.parse(*/"{" + '"' + document.getElementById("DeckName" + i).value + '"' + ":{"+ "\"type\":\"single\",\"card\":" + document.getElementById("DeckCard" + i).value + ",\"count\":" +document.getElementById("DeckCardAmmount" + i).value + "}}"
+
+    cards = cards + ",\"" +document.getElementById("DeckName" + i).value +"\":{\"type\": \"single\",\"card\":\"" + document.getElementById("DeckCard" + i).value + "\",\"count\":" + document.getElementById("DeckCardAmmount" + i).value + "}"
     i += 1;
   }
+  cards = cards + "}";
+  cards = JSON.parse(cards);
   return cards;
 }
 function build()
@@ -217,9 +228,9 @@ function build()
   var workingsig = [		"Airborne",		"Mighty Leap",		"Fecundity (Kaycee)",		"Fecundity",		"Unkillable",		"Blue Mox",		"Green Mox",		"Orange Mox",		"Great Mox",		"Rabbit Hole",		"Touch of Death",		"Many Lives",		"Trifurcated Strike",		"Battery Bearer",		"Repulsive",		"Brittle",		"Worthy Sacrifice",		"Gem Dependant",		"Bone King",		"Bifurcated Strike",		"Handy",		"Fledgling",		"Sprinter",		"Squirrel Shedder",		"Skeleton Crew",		"Bone Digger",		"Waterborne",		"Ruby Heart",		"Frozen Away",		"Mental Gemnastics",		"Looter",		"Gem Animator",		"Hefty",		"Guardian",		"Sharp Quills",		"Sentry",		"Burrower",		"Hoarder",		"Detonator",		"Detonator (5)",		"Bomb Spewer",		"Double Death",		"Enlarge",		"Disentomb",		"Disentomb (Corpses)",		"Power Dice",		"Power Dice (2)",	"Stimulate",		"Stimulate (4)",		"Energy Gun",		"True Scholar",		"Bonehorn",		"Bonehorn (1)",		"Boneless",		"Attack Conduit",		"Spawn Conduit",		"Energy Conduit",		"Energy Conduit (+3)",		"Tentacle",		"Stinky",		"Reconstitute",		"Noble Sacrifice",		"Made of Stone",		"Side Hustle",		"Armored",		"Leader",		"Ant Spawner",		"Double Strike",		"Blood Lust",		"Music Player",		"Transformer",		"Vessel Printer",		"Bees Within",		"Dam Builder",		"Corpse Eater",		"Gem Guardian",		"Gem Detonator (5)",	"Depleting",		"Bellist",	"Omni Strike",		"Enlarge (3)",		"Skeleton Crew (Yarr)",		"Thick"	];
   json.sigils = sigils;
   json.working_sigils = workingsig;
-  json.side_decks = {"10 Squirrels": {"type": "single","card": "Squirrel","count": 10}};
+  json.side_decks = readCustomDecks();
   let Outputfile = JSON.stringify(json,null,3);
-  document.getElementById("output").innerHTML = JSON.stringify(json,null,3);
+  //document.getElementById("output").innerHTML = JSON.stringify(json,null,3);
   let link = document.createElement("a");
   let file = new Blob([Outputfile], { type: 'json/plain' });
   link.href = URL.createObjectURL(file);

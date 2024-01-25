@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>inscryption multiplayer ruleset editor</title>
+  <title>Inscriber</title>
   
   <!-- HTML -->
   
@@ -16,35 +16,93 @@
 
 <body>
   <center>
+    
   <h1>Main Info</h1>
+  <table>
+    <tr>
+    <td>
+      <center>
   <p>Name</p>
-  <input type="text" id="name">
+  <input type="text" id="name" value="Custom Ruleset">
+</center>
+  </td>
+  <td>
+    <center>
   <p>Description</p>
-  <input type="text" id="description">
+  <textarea type="text" id="description">A custom ruleset generated using Inscriber</textarea>
+</center>
+  </td>
+</tr>
+<tr>
+  <td>
+    <center>
   <p>min cards in deck</p>
-  <input type="text" id="mindeck">
+  <input type="number" id="mindeck" min="1" value="1">
+</center>
+</td>
+<td>
+  <center>
   <p>Candles</p>
-  <input type="text" id="lives">
+  <input type="number" id="lives" min="1" value="2">
+</center>
+</td>
+</tr>
+<tr>
+  <td>
+    <center>
   <p>Hammers per turn</p>
-  <input type="text" id="hammers">
+  <input type="number" id="hammers" min="1" value="1">
+</center>
+</td>
+<td>
+  <center>
   <p>Ant limit</p>
-  <input type="text" id="maxAnts">
+  <input type="number" id="maxAnts" min="1" value="2">
+</center>
+</td>
+</tr>
+</table>
   <hr>
   <h2>I'm not sure what thease do</h2>
+  <table>
+    <tr>
+      <td>
+        <center>
   <p>Portrait</p>
-  <input type="text" id="image">
+  <input type="text" id="image" value="portraits/Stoat">
+</center>
+</td>
+<td>
+  <center>
   <p>max_commons_main</p>
-  <input type="text" id="max_commons_main">
+  <input type="number" id="max_commons_main" min="1" value="4">
+</center>
+</td>
+</tr>
+<tr>
+  <td><center>
   <p>max_commons_side</p>
-  <input type="text" id="max_commons_side">
+  <input type="number" id="max_commons_side" min="1" value="10">
+</center></td>
+  <td><center>
   <p>variable_attack_nerf</p>
-  <input type="checkbox" id="variable_attack_nerf">
+  <input type="checkbox" id="variable_attack_nerf" class="checkbox">
+</center></td>
+</tr>
+  <tr>
+    <td><center>
   <p>allow_snuffing_candles</p>
-  <input type="checkbox" id="allow_snuffing_candles">
+  <input type="checkbox" id="allow_snuffing_candles" class="checkbox">
+</center></td>
+  <td><center>
   <p>opt_actives</p>
-  <input type="checkbox" id="opt_activities">
-  <p>enable_backrow</p>
-  <input type="checkbox" id="enable_backrow">
+  <input type="checkbox" id="opt_activities" class="checkbox">
+</center></td>
+</tr>
+</table>
+  <p>enable_backrow <br>(DOESEN'T WORK, LEAVE UNCHECKED)</p>
+  <input type="checkbox" id="enable_backrow" class="checkbox">
+
   <hr>
   <h1>Cards</h1>
   <p>keep in mind that you need to make every card you want to have in a ruleset (only squirells are included by default)</p>
@@ -53,12 +111,12 @@
   <button onclick="removeCard()">Remove Card</button>
   <hr>
   
-  <!--<h1>Side Decks</h1>
+  <h1>Side Decks</h1>
   <p>keep in mind, that you need to make a card to add it to a side deck</p>
   <div id="customDeckContainer"></div>
   <button onclick="addNewDeck()">New Side Deck</button>
   <button onclick="removeDeck()">Remove Side Deck</button>
-  <hr>-->
+  <hr>
   <button onclick="build()">Create Ruleset</button>
   </center>
   <p id="output"></p>
