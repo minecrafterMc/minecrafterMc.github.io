@@ -232,7 +232,6 @@ function build()
   json.allow_snuffing_candles = document.getElementById("allow_snuffing_candles").checked;
   json.opt_activities = document.getElementById("opt_activities").checked;
   //json.enable_backrow = document.getElementById("enable_backrow").checked;
-  //tt
   json.portrait = document.getElementById("image").value;
   json.description = document.getElementById("description").value;
   json.cards = readCustomCards();
