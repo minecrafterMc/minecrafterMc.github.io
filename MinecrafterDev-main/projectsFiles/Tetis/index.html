@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="style.css">
+        <title></title>
+    </head>
+    <body id="body">
+      <!--<button onclick="print()" id="print">print</button>-->
+        <center>
+            <table>
+              <tr>
+              <td>
+              <div id="controlls2">
+                <button onclick="srotate(-1);" class="buttons">l rot</button>
+               
+                <br>
+          <button onclick='smove(-1,0)' id="left" class="buttons">left</button>
+        <br>
+         <button onclick="pause2();" class="buttons">pause</button>
+        </td>
+              </div>
+                <!--<td>-->
+                  
+        <canvas id="canvas" height="605" width="305">test</canvas>
+        <canvas id="2display" height="110" width="110"></canvas>
+        <embed src="settings.svg" id="settings"/>
+        
+   <!-- </td>-->
+    
+  
+        <h2 id="points"></h2>
+        <div id="controlls">
+            
+        <!--<td>-->
+           <button onclick="srotate(1)" class="buttons">r rot</button>
+        
+        <br>
+       <button onclick='smove(1,0)' id="right" class="buttons">right</button>
+        <br>
+        <button onclick='fastdown = true;' id="down" class="buttons">down</button>
+        </div>
+        <!--</td>
+        </tr>-->
+        
+            </table>
+        </center>
+        <br>
+        <center>
+        <tr>
+        
+        <br>
+        <br>
+       
+        <button  id="pchelp" onclick="closepchelp()">
+        <p>pc controlls:<br>
+        a - move shape left<br>
+        d - move shape right<br>
+        s - make the shape fall to the bottom<br>
+        left arrow - rotate shape left<br>
+        right arrow - rotate shape right<br>
+        e - pause<br>click to close</p>
+        </button>
+    </tr>
+    
+        </center>
+        <embed src="" id="settingsPage"/>
+        <img id="img">
+        <script src="script.js"> </script>
+    </body>
+</html>
