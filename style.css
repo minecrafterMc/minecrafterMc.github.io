@@ -24,7 +24,7 @@ body {
     margin-right: auto;
     background-color: #00f260;
     list-style-type: none;
-    border-radius: 1px;
+    border-radius: 0px;
     position: sticky;
     top: 5px;
     z-index: 20;
@@ -69,7 +69,7 @@ body {
     background-color: #0fdbe5;
     width: 1160px;
     border: 0px solid;
-    border-radius: 50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000px;
+    border-radius: 100px;
     opacity: 0.8;
     margin-left: auto;
     margin-right: auto;
@@ -85,7 +85,7 @@ body {
     background-color: #bec46e;
     width: 1160px;
     border: 0px solid;
-    border-radius: 50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000px;
+    border-radius: 50000px;
     opacity: 0.8;
     margin-left: auto;
     margin-right: auto;
@@ -116,11 +116,12 @@ body {
     width: 500px;
     height: 280px;
     object-fit: cover;
-    margin-bottom: 10px;
+    
   }
   
   .dwie-kolumny img:hover {
     opacity: 0.9;
+    transform: scale(1.1);
     transition-duration: 0.5s;
   }
   
