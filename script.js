@@ -6,6 +6,7 @@ if (navigator.userAgent.indexOf("Android") != -1 || navigator.userAgent.indexOf(
             mobile();
             ismobile = true;
             }
+            document.getElementById("kontener").style.borderradius= "90px";
 function tick()
 {
     if (window.innerWidth < 1387)
