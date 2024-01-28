@@ -96,5 +96,39 @@ function load()
         i += 1;
     }
 }
+function submitquiz()
+{
+    if (document.getElementById("1").checked)
+    {
+        if (document.getElementById("2").checked)
+    {
+        if (document.getElementById("3").checked)
+    {
+        document.getElementById("quiz").style.backgroundColor = "green";
+        document.getElementById("quizcenter").style.backgroundColor = "green";
+        setTimeout(redirect, 5000);
+    }
+    else
+    {
+        document.getElementById("quiz").style.backgroundColor = "red";
+        document.getElementById("quizcenter").style.backgroundColor = "red";
+    }
+    }
+    else
+    {
+        document.getElementById("quiz").style.backgroundColor = "red";
+        document.getElementById("quizcenter").style.backgroundColor = "red";
+    }
+    }
+    else
+    {
+        document.getElementById("quiz").style.backgroundColor = "red";
+        document.getElementById("quizcenter").style.backgroundColor = "red";
+    }
+}
+function redirect()
+{
+    window.location.href = "index.html";
+}
 load();
 setInterval(tick,100);
