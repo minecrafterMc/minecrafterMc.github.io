@@ -1,34 +1,38 @@
+@font-face {
+    font-family: pixel;
+    src: url(projectsFiles/Inscriber-main/Marksman.otf);
+  }
+
 body {
-    background: linear-gradient(
-      to right,
-      #70e1f5,
-      #ffd194
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    font-family: "Lato", sans-serif;
+    background: rgb(122,0,255);
+background: linear-gradient(90deg, rgba(122,0,255,1) 0%, rgba(0,205,255,1) 100%);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: "pixel", sans-serif;
     color: #21376c;
   }
   h1 {
     font-size: 50px;
-    font-family: "Secular One", sans-serif;
+    font-family: "pixel", sans-serif;
     text-align: center;
     letter-spacing: 0.3px;
   }
   
-  h1 img {
+  /*h1 img {
     margin-right: 15px;
-  }
+  }*/
   
   #nav {
     width: 1144px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #00f260;
+    background-color: #5fedeb;
     list-style-type: none;
     border-radius: 0px;
     position: sticky;
     top: 5px;
     z-index: 20;
     font-size: 20px;
+    text-align: center;
   }
   
   #nav li {
@@ -45,7 +49,8 @@ body {
     text-decoration: none;
     color: #ee9ca7;
     letter-spacing: 0.3px;
-    margin-left: 0px;
+    margin-left: auto;
+    font-size: 30px;
   }
   a {
     z-index: 3;
@@ -99,8 +104,8 @@ body {
   }
   
   h2 {
-    font-family: "Secular One", sans-serif;
-    font-size: 30px;
+    font-family: "pixel", sans-serif;
+    font-size: 50px;
     margin-bottom: 50px;
     margin-top: 30px;
   }
@@ -121,7 +126,6 @@ body {
   
   .dwie-kolumny img:hover {
     opacity: 0.9;
-    transform: scale(1.1);
     transition-duration: 0.5s;
   }
   

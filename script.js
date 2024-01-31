@@ -1,6 +1,11 @@
 var ismobile = false;
 var optimize = false;
 var extraoptimize = false;
+async function FetchData(url) {
+  let response = await fetch(url);
+  let data = await response.json();
+  console.log(data);
+}
 if (navigator.userAgent.indexOf("Android") != -1 || navigator.userAgent.indexOf("IOS") != -1)
         {
             mobile();
@@ -34,20 +39,24 @@ function tick()
    
     if (ismobile)
     {
-        document.getElementById("nav").style.width = window.innerWidth - 70 + "px";
+        document.getElementById("nav").style.width = window.innerWidth / 1.2 + "px";
     
-        document.getElementById("kontener").style.width = window.innerWidth - 70 + "px";
+        document.getElementById("kontener").style.width = window.innerWidth / 1.1 + "px";
         document.getElementById("newscontainer").style.width = window.innerWidth - 70 + "px";
+        document.getElementById("logo").width = window.innerWidth / 50;
+        document.getElementById("logo").style.width = window.innerWidth / 1.4 + "px";
+        optimizecovers();
+    
     }
     else if (!optimize){
 
-        document.getElementById("nav").style.width = window.innerWidth - 700 + "px";
-        document.getElementById("kontener").style.width = window.innerWidth - 400 + "px";
+        document.getElementById("nav").style.width = window.innerWidth - 70 + "px";
+        document.getElementById("kontener").style.width = window.innerWidth - 70 + "px";
         document.getElementById("newscontainer").style.width = window.innerWidth - 70 + "px";
         
     }
     else if (!extraoptimize){
-        document.getElementById("nav").style.width = window.innerWidth - 70 + "px";
+        document.getElementById("nav").style.width = window.innerWidth - 50 + "px";
         document.getElementById("kontener").style.width = window.innerWidth - 50 + "px";
         document.getElementById("newscontainer").style.width = window.innerWidth - 50 + "px";
     }
@@ -72,8 +81,22 @@ function mobile()
         document.getElementsByClassName("dwie-kolumny")[i].style.width = "100%";
         i += 1;
     }
+    try{
+      
+    optimizecovers();
     document.getElementById("kontener").width = window.innerWidth + "px";
     document.getElementById("kontener").style.clear = "none";
+    }
+    catch{
+      
+    }
+    try {
+    document.getElementById("newscontainer").width = window.innerWidth + "px";
+    document.getElementById("newscontainer").style.clear = "none";
+    }
+    catch{
+      
+    }
     document.getElementById("nav").style.position = "static";
 }
 function optimizecovers()
@@ -82,8 +105,9 @@ function optimizecovers()
     let i = 0;
     while (i != covers.length)
     {
-        document.getElementsByClassName("dwie-kolumny")[i].style.width = window.innerWidth / 3 + "px";
-        document.getElementsByClassName("cover")[i].style.width = window.innerWidth / 3 + "px";
+        document.getElementsByClassName("cover")[i].style.width = window.innerWidth / 4 + "px";
+        document.getElementsByClassName("cover")[i].style.left = 0 + "px";
+        
         i += 1;
     }
 }
