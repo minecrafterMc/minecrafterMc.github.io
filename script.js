@@ -15,6 +15,7 @@ async function PostData(url, datatosend) {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
+          referrerPolicy: "unsafe_url",
         body: JSON.stringify(datatosend)
     });
   }
