@@ -1,11 +1,23 @@
 var ismobile = false;
 var optimize = false;
 var extraoptimize = false;
+var response = NaN;
+var data = NaN;
 async function FetchData(url) {
-  let response = await fetch(url);
-  let data = await response.json();
+  response = await fetch(url);
+  data = await response.json();
   console.log(data);
 }
+async function PostData(url, datatosend) {
+    response = await fetch(url,{
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        body: JSON.stringify(datatosend)
+    });
+  }
 if (navigator.userAgent.indexOf("Android") != -1 || navigator.userAgent.indexOf("IOS") != -1)
         {
             mobile();
