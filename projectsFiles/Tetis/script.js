@@ -141,6 +141,22 @@ generateShape(0,0,"dis");
 generateShape(4,0,"canvas");
 var tickID = setInterval(tick,250);
 setInterval(screenadjust,100);
+//whoever sees this, please dont abuse this link. this webhook is connected to my private discord server. you abusing it would just annoy me
+const whurl ="https://discord.com/api/webhooks/1204492141544345600/L6juWPsDzT9CgW8-wFuIcmqYIzgduJLRDPEOMdWx1meZ2SYLD1tSTdiy5WA1ID5pUre7"
+
+var msg = {
+    "content": "someone just started playing tetis!"
+}
+
+fetch(whurl + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
+function sendPoints()
+{
+    msg = {
+        "content": "someone just got " + points + " points!!!"
+    }
+    
+    fetch(whurl + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
+}
 function recolor()
 {
   let i = 0;
@@ -1064,6 +1080,10 @@ function checkLose()
       shape = [0];
       document.getElementById("controlls").style.display = "none";
       document.getElementById("controlls2").style.display = "none";
+      if (points > 2000)
+      {
+        sendPoints();
+      }
       break;
     }
     i += 1;

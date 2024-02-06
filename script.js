@@ -3,6 +3,7 @@ var optimize = false;
 var extraoptimize = false;
 var response = NaN;
 var data = NaN;
+
 async function FetchData(url) {
   response = await fetch(url);
   data = await response.json();
@@ -11,11 +12,12 @@ async function FetchData(url) {
 async function PostData(url, datatosend) {
     response = await fetch(url,{
         method: "POST",
+        credentials: "same-origin",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          referrerPolicy: "unsafe_url",
+          referrerPolicy: "no-referrer",
         body: JSON.stringify(datatosend)
     });
   }
