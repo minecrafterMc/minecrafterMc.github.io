@@ -114,25 +114,47 @@ class cell
         }
     }
 }
-var colorIndex = 0;
+var colorIndex = 3;
 var colorPaletes = [
 {
+  "name": "blue light mode",
   "shapecolor": "cyan",
   "emptycolor": "white",
   "trailcolor": "lightblue",
-  "fallencolor": "grey"
+  "fallencolor": "grey",
+  "textcolor": "black"
 },
 {
+  "name": "ocean",
   "shapecolor": "cyan",
   "emptycolor": "darkblue",
   "trailcolor": "lightblue",
-  "fallencolor": "grey"
+  "fallencolor": "grey",
+  "textcolor": "white"
 },
 {
+  "name": "default",
   "shapecolor": "#105b66",
   "emptycolor": "#292929",
   "trailcolor": "#283d40",
-  "fallencolor": "#092529"
+  "fallencolor": "#092529",
+  "textcolor": "white"
+},
+{
+  "name": "ultra dark mode",
+  "shapecolor": "darkgrey",
+  "emptycolor": "black",
+  "trailcolor": "grey",
+  "fallencolor": "lightgrey",
+  "textcolor": "white"
+},
+{
+  "name": "matrix",
+  "shapecolor": "green",
+  "emptycolor": "black",
+  "trailcolor": "lime",
+  "fallencolor": "darkgreen",
+  "textcolor": "white"
 }
 ]
 var cell1 = new cell(0,0,25,25,0,1,"blue");
@@ -171,12 +193,19 @@ var msg = {
 //fetch(whurl + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
 function changecolor()
 {
+  document.getElementById("colorname").innerHTML = colorPaletes[colorIndex].name;
+  document.getElementById("colorname").style.color = colorPaletes[colorIndex].textcolor;
+  document.getElementById("points").style.color = colorPaletes[colorIndex].textcolor;
   emptycolor = colorPaletes[colorIndex].emptycolor;
   document.getElementById("body").style.backgroundColor = emptycolor;
   trailcolor = colorPaletes[colorIndex].trailcolor;
   fallencolor = colorPaletes[colorIndex].fallencolor;
   shapecolor = colorPaletes[colorIndex].shapecolor;
   recolor();
+  displayshape2();
+  generateShape(shape[0].bx,shape[0].by,"dis");
+  srotate(-1);
+  srotate(1);
   let i = 0;
   while (i != 200)
   {
@@ -195,6 +224,8 @@ function changecolor()
   {
     colorIndex = 0;
   }
+  refreshboard();
+  drawShape();
 }
 function sendPoints()
 {
@@ -1569,6 +1600,26 @@ if(checkFallShape())
     }
     smove(0,1);
   }
+}
+function onetick()
+{
+  document.getElementById("points").innerHTML = points;
+  checkRows();
+  checkEmptyRows();
+  refreshboard();
+  drawShape();
+  if (fastdown)
+  {
+    IID = setInterval(fastfall, 50);
+    fastdown = false;
+  }
+  if (checkFallShape())
+  {
+    fallenShape();
+    generateShape(4, 0);
+    points += 50;
+  }
+  smove(0, 1);
 }
 function changebuttons(funwidth,funheight)
 {
