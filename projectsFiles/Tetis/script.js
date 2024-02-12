@@ -114,7 +114,27 @@ class cell
         }
     }
 }
-
+var colorIndex = 0;
+var colorPaletes = [
+{
+  "shapecolor": "cyan",
+  "emptycolor": "white",
+  "trailcolor": "lightblue",
+  "fallencolor": "grey"
+},
+{
+  "shapecolor": "cyan",
+  "emptycolor": "darkblue",
+  "trailcolor": "lightblue",
+  "fallencolor": "grey"
+},
+{
+  "shapecolor": "#105b66",
+  "emptycolor": "#292929",
+  "trailcolor": "#283d40",
+  "fallencolor": "#092529"
+}
+]
 var cell1 = new cell(0,0,25,25,0,1,"blue");
 drawCell(cell1);
 var shapetype = 1;
@@ -148,7 +168,34 @@ var msg = {
     "content": "someone just started playing tetis!"
 }
 
-fetch(whurl + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
+//fetch(whurl + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
+function changecolor()
+{
+  emptycolor = colorPaletes[colorIndex].emptycolor;
+  document.getElementById("body").style.backgroundColor = emptycolor;
+  trailcolor = colorPaletes[colorIndex].trailcolor;
+  fallencolor = colorPaletes[colorIndex].fallencolor;
+  shapecolor = colorPaletes[colorIndex].shapecolor;
+  recolor();
+  let i = 0;
+  while (i != 200)
+  {
+    if (boardArr[i].exist)
+    {
+    boardArr[i].color = fallencolor;
+    }
+    else {
+    boardArr[i].color = emptycolor;
+    }
+    drawCell(boardArr[i]);
+    i += 1;
+  }
+  colorIndex += 1;
+  if (colorIndex > colorPaletes.length - 1)
+  {
+    colorIndex = 0;
+  }
+}
 function sendPoints()
 {
     msg = {
@@ -1332,6 +1379,12 @@ function refreshboard()
 function opensettings()
 {
     pause = false;
+    document.getElementById("settingsPage2").style.display = "block";
+}
+function closesettings()
+{
+  pause = true;
+  document.getElementById("settingsPage2").style.display = "none";
 }
 const getValueByIndex = (object, index) => {
 
@@ -1413,7 +1466,7 @@ function closepchelp()
             document.getElementById("2display").style.width = "50px";
             document.getElementById("2display").style.height = "50px";
             document.getElementById("settings").style.position = "absolute";
-            document.getElementById("settingsPage").style.position = "absolute";
+            document.getElementById("settingsPage2").style.position = "absolute";
         
         window.addEventListener("keydown", event => {
             if (event.key == "a") {
@@ -1477,6 +1530,7 @@ function closepchelp()
             }
             i += 1;
         }
+        closesettings();
         }
         function fastfall()
         {
@@ -1530,16 +1584,19 @@ function changebuttons(funwidth,funheight)
 function screenadjust() 
 {
     document.getElementById("canvas").style.top = window.innerHeight / 20 + "px";
+    document.getElementById("settingsPage2").style.zIndex = 14;
+    document.getElementById("settingsPage2").style.top = window.innerHeight / 20 + "px";
     document.getElementById("controlls").style.top = window.innerHeight / 20 + "px";
     document.getElementById("controlls2").style.top = window.innerHeight / 20 + "px";
     document.getElementById("controlls2").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + "px";
     document.getElementById("controlls").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + window.innerHeight / 2.2 - window.innerHeight / 15 + "px";
     changebuttons(window.innerHeight / 15 + "px",window.innerHeight / 3.6 + "px")
     document.getElementById("canvas").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + "px";
-    document.getElementById("settingsPage").style.left = window.innerWidth - window.innerWidth / 1.1 + "px";
-    document.getElementById("settingsPage").style.width = window.innerHeight / 1.9 + "px";
+    document.getElementById("settingsPage2").style.left = window.innerWidth - window.innerWidth / 1.1 + "px";
     document.getElementById("canvas").style.height = window.innerHeight / 1.2 + "px";
     document.getElementById("canvas").style.width = window.innerHeight / 2.2 + "px";
+    document.getElementById("settingsPage2").style.height = window.innerHeight / 1.2 + "px";
+    document.getElementById("settingsPage2").style.width = window.innerHeight / 2.2 + "px";
     document.getElementById("2display").style.height = window.innerHeight / 6 + "px";
     document.getElementById("2display").style.width = window.innerHeight / 6 + "px";
     document.getElementById("2display").style.top = window.innerHeight / 20 + "px";
@@ -1552,6 +1609,7 @@ function screenadjust()
     if (window.innerWidth / 2 - window.innerWidth / 2.7 + window.innerHeight / 2.2 + window.innerWidth / 20 + window.innerHeight / 6 > window.innerWidth)
     {
         document.getElementById("canvas").style.left = window.innerWidth / 2 - window.innerWidth / 2 + "px";
+        document.getElementById("settingsPage2").style.left = window.innerWidth / 2 - window.innerWidth / 2 + "px";
         document.getElementById("points").style.left = window.innerWidth / 2 - window.innerWidth / 2 + "px";
         document.getElementById("controlls2").style.left = window.innerWidth / 2 - window.innerWidth / 2 + "px";
         document.getElementById("controlls").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerHeight / 2.2 - window.innerHeight / 15 + "px";
@@ -1561,14 +1619,16 @@ function screenadjust()
     if (window.innerWidth / 2 - window.innerWidth / 2 + window.innerHeight / 2.2 + window.innerWidth / 20 + window.innerHeight / 6 > window.innerWidth)
     {
         document.getElementById("canvas").style.left = window.innerWidth / 2 - window.innerWidth / 2 + "px";
+        document.getElementById("settingsPage2").style.left = window.innerWidth / 2 - window.innerWidth / 2 + "px";
         document.getElementById("points").style.left = window.innerWidth / 2 - window.innerWidth / 2 + "px";
         document.getElementById("controlls2").style.left = window.innerWidth / 2 - window.innerWidth / 2 + "px";
         document.getElementById("controlls").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerWidth / 1.5 - window.innerHeight / 15 + "px";
         document.getElementById("2display").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerWidth / 1.5 + "px";
         document.getElementById("settings").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerWidth / 1.5 + "px";
         document.getElementById("canvas").style.width = window.innerWidth / 1.5 + "px";
-        document.getElementById("settingsPage").style.width = window.innerWidth / 1.5 + "px";
+        document.getElementById("settingsPage2").style.width = window.innerWidth / 1.5 + "px";
         document.getElementById("2display").style.width = window.innerWidth / 4 + "px";
         document.getElementById("settings").style.width = window.innerWidth / 4 + "px";
     }
+    
 }

@@ -10,6 +10,7 @@
   left: 260px;
   top: 30px;
   opacity: 60%;
+  z-index: 11;
 }
 #controlls2
 {
@@ -17,6 +18,7 @@
   left: 20px;
   top: 30px;
   opacity: 60%;
+  z-index: 11;
 }
 .print
 {
@@ -30,4 +32,8 @@
   color:white;
   background-color: black;
   z-index: 20;
+}
+.settingsPage2
+{
+  z-index: 12;
 }

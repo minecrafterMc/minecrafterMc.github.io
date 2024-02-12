@@ -95,4 +95,16 @@
            y="67.354675">Next Color Pallete</tspan></text>
     </g>
   </g>
+  <script>
+ document.getElementById("layer2").addEventListener("click", 
+                                                      closesettings,
+                                                        false);
+
+    function closesettings()
+    {
+
+        if (window.parent.closesettings)
+            window.parent.closesettings();
+    }
+    </script>
 </svg>
