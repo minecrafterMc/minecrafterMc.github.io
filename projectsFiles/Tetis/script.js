@@ -122,7 +122,7 @@ var colorPaletes = [
   "emptycolor": "white",
   "trailcolor": "lightblue",
   "fallencolor": "grey",
-  "textcolor": "black"
+  "textcolor": "blue"
 },
 {
   "name": "ocean",
@@ -155,8 +155,26 @@ var colorPaletes = [
   "trailcolor": "lime",
   "fallencolor": "darkgreen",
   "textcolor": "white"
+},
+{
+  "name": "blue dark mode",
+  "shapecolor": "darkblue",
+  "emptycolor": "black",
+  "trailcolor": "blue",
+  "fallencolor": "grey",
+  "textcolor": "white"
+},
+{
+
+  "name": "amogus",
+  "shapecolor": "red",
+  "emptycolor": "grey",
+  "trailcolor": "grey",
+  "fallencolor": "white",
+  "textcolor": "white"
 }
 ]
+var maxshapeid = 7;
 var cell1 = new cell(0,0,25,25,0,1,"blue");
 drawCell(cell1);
 var shapetype = 1;
@@ -171,7 +189,7 @@ var shapeRotation = 1;
 var dir = 0;
 var fastdown = false;
 var IID = NaN;
-var shapetypec = RandomInt(1,7);
+var shapetypec = RandomInt(1,maxshapeid);
 var fallencolor = "#092529";
 var emptycolor = "#292929";
 var trailcolor = "#283d40";
@@ -191,6 +209,11 @@ var msg = {
 }
 
 //fetch(whurl + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
+function playsound(sound)
+{
+  let audio = new Audio(sound);
+  audio.play();
+}
 function changecolor()
 {
   document.getElementById("colorname").innerHTML = colorPaletes[colorIndex].name;
@@ -1152,6 +1175,7 @@ function checkLose()
   {
     if (boardArr[i].getExist())
     {
+      playsound("lose.mp3");
         clearInterval(tickID);
       pause = false;
       fallenShape();
@@ -1322,8 +1346,9 @@ function fallenShape()
         }
         i += 1;
     }
+    playsound("blockFall.mp3")
     shapetypeb = shapetypec;
-    shapetypec = RandomInt(1,7);
+    shapetypec = RandomInt(1,maxshapeid);
     generateShape(0,0,"dis");
     shapeRotation = 1;
     shapetype = shapetypeb * 4 + shapeRotation - 4;
@@ -1582,6 +1607,13 @@ function tick()
   checkLose();
   if(pause)
   {
+    if (colorIndex == 6 - (colorPaletes.length - 1))
+    {
+      maxshapeid = 8;
+    }
+    else{
+      maxshapeid = 7;
+    }
     document.getElementById("points").innerHTML = points;
     checkRows();
     checkEmptyRows();

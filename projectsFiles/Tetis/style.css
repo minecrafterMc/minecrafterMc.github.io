@@ -33,7 +33,9 @@
   background-color: black;
   z-index: 20;
 }
-.settingsPage2
+#settingsPage2
 {
   z-index: 12;
+  background-color: black;
+  opacity: 75%;
 }
