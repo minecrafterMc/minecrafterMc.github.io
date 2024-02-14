@@ -39,3 +39,6 @@
   background-color: black;
   opacity: 75%;
 }
+#loose{
+  z-index: 14;
+}

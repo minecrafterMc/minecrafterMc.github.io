@@ -7,6 +7,13 @@
         <title></title>
     </head>
     <body id="body">
+      <div id="loose">
+        <center>
+        <h1>YOU LOST</h1>
+        <h2 id="loosepoints"></h2>
+        <button onclick="location.reload();">try again?</button>
+        </center>
+      </div>
       <!--<button onclick="print()" id="print">print</button>-->
         <center>
             <table>
@@ -67,8 +74,10 @@
         </center>
         <div id="settingsPage2">
         <center>
-        <button onclick="changecolor()">change colors</button><br>
+          <p id="changecolortext">change colors</p>
+        <button style="width: 40px; height: 40px;" onclick="changecolor2()"><--</button>   <button style="width: 40px; height: 40px;" onclick="changecolor()">--></button><br>
         <p id="colorname">default</p>
+        <p id="soundtoggletext">Disable sounds<input type="checkbox" id="soundtoggle"></p>
         <button onclick="closesettings()">back to game</button>
         </center>
         </div>

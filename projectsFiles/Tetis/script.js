@@ -114,7 +114,7 @@ class cell
         }
     }
 }
-var colorIndex = 3;
+var colorIndex = 1;
 var colorPaletes = [
 {
   "name": "blue light mode",
@@ -211,16 +211,28 @@ var msg = {
 //fetch(whurl + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
 function playsound(sound)
 {
+  if (!document.getElementById("soundtoggle").checked)
+  {
   let audio = new Audio(sound);
   audio.play();
+  }
 }
 function changecolor()
 {
+  colorIndex += 1;
+  if (colorIndex > colorPaletes.length - 1 || colorIndex < 0)
+  {
+    colorIndex = 0;
+  }
   document.getElementById("colorname").innerHTML = colorPaletes[colorIndex].name;
+  document.getElementById("loose").style.backgroundColor = colorPaletes[colorIndex].emptycolor;
   document.getElementById("colorname").style.color = colorPaletes[colorIndex].textcolor;
   document.getElementById("points").style.color = colorPaletes[colorIndex].textcolor;
   emptycolor = colorPaletes[colorIndex].emptycolor;
   document.getElementById("body").style.backgroundColor = emptycolor;
+  document.getElementById("loose").style.color = colorPaletes[colorIndex].textcolor;
+  document.getElementById("soundtoggletext").style.color = colorPaletes[colorIndex].textcolor;
+  document.getElementById("changecolortext").style.color = colorPaletes[colorIndex].textcolor;
   trailcolor = colorPaletes[colorIndex].trailcolor;
   fallencolor = colorPaletes[colorIndex].fallencolor;
   shapecolor = colorPaletes[colorIndex].shapecolor;
@@ -242,10 +254,47 @@ function changecolor()
     drawCell(boardArr[i]);
     i += 1;
   }
-  colorIndex += 1;
-  if (colorIndex > colorPaletes.length - 1)
+  
+  
+  refreshboard();
+  drawShape();
+}
+function changecolor2()
+{
+  colorIndex -= 1;
+  if (colorIndex < 0)
   {
-    colorIndex = 0;
+    colorIndex = colorPaletes.length - 1;
+  }
+  document.getElementById("colorname").innerHTML = colorPaletes[colorIndex].name;
+  document.getElementById("loose").style.backgroundColor = colorPaletes[colorIndex].emptycolor;
+  document.getElementById("colorname").style.color = colorPaletes[colorIndex].textcolor;
+  document.getElementById("points").style.color = colorPaletes[colorIndex].textcolor;
+  emptycolor = colorPaletes[colorIndex].emptycolor;
+  document.getElementById("body").style.backgroundColor = emptycolor;
+  document.getElementById("loose").style.color = colorPaletes[colorIndex].textcolor;
+  document.getElementById("soundtoggletext").style.color = colorPaletes[colorIndex].textcolor;
+  document.getElementById("changecolortext").style.color = colorPaletes[colorIndex].textcolor;
+  trailcolor = colorPaletes[colorIndex].trailcolor;
+  fallencolor = colorPaletes[colorIndex].fallencolor;
+  shapecolor = colorPaletes[colorIndex].shapecolor;
+  recolor();
+  displayshape2();
+  generateShape(shape[0].bx, shape[0].by, "dis");
+  srotate(-1);
+  srotate(1);
+  let i = 0;
+  while (i != 200)
+  {
+    if (boardArr[i].exist)
+    {
+      boardArr[i].color = fallencolor;
+    }
+    else {
+      boardArr[i].color = emptycolor;
+    }
+    drawCell(boardArr[i]);
+    i += 1;
   }
   refreshboard();
   drawShape();
@@ -1177,6 +1226,8 @@ function checkLose()
     {
       playsound("lose.mp3");
         clearInterval(tickID);
+        document.getElementById("loose").style.display = "block";
+        document.getElementById("loosepoints").innerHTML = "you got " + points + " points";
       pause = false;
       fallenShape();
       shape = [0];
@@ -1496,6 +1547,7 @@ function closepchelp()
     {   
         document.getElementById("controlls").style.display = "none";
         document.getElementById("controlls2").style.display = "none";
+        document.getElementById("loose").style.display = "none";
         if (navigator.userAgent.indexOf("Android") != -1 || navigator.userAgent.indexOf("IOS") != -1)
         {
           document.getElementById("pchelp").style.display = "none";
@@ -1511,6 +1563,9 @@ function closepchelp()
                 document.getElementById("pchelp").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + "px";
             }
             document.getElementById("canvas").style.position = "absolute";
+             document.getElementById("loose").style.position = "absolute";
+              document.getElementById("loose").style.top = "0px";
+                document.getElementById("loose").style.left = "0px";
             //document.getElementById("canvas").style.left = "10px";
             //document.getElementById("canvas").style.top = "15px";
             document.getElementById("canvas").style.height = window.innerHeight + "px";
@@ -1672,6 +1727,8 @@ function screenadjust()
     document.getElementById("controlls").style.top = window.innerHeight / 20 + "px";
     document.getElementById("controlls2").style.top = window.innerHeight / 20 + "px";
     document.getElementById("controlls2").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + "px";
+    document.getElementById("loose").style.width = window.innerWidth + "px";
+    document.getElementById("loose").style.height = window.innerHeight + "px";
     document.getElementById("controlls").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + window.innerHeight / 2.2 - window.innerHeight / 15 + "px";
     changebuttons(window.innerHeight / 15 + "px",window.innerHeight / 3.6 + "px")
     document.getElementById("canvas").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + "px";
@@ -1715,3 +1772,4 @@ function screenadjust()
     }
     
 }
+changecolor();
