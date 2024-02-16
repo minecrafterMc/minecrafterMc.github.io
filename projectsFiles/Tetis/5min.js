@@ -190,6 +190,7 @@ var dir = 0;
 var fastdown = false;
 var IID = NaN;
 var shapetypec = RandomInt(1,maxshapeid);
+var timeleft = 300;
 var fallencolor = "#092529";
 var emptycolor = "#292929";
 var trailcolor = "#283d40";
@@ -200,6 +201,7 @@ setup();
 generateShape(0,0,"dis");
 generateShape(4,0,"canvas");
 var tickID = setInterval(tick,250);
+var timerID = setInterval(timer,1000);
 setInterval(screenadjust,100);
 //whoever sees this, please dont abuse this link. this webhook is connected to my private discord server. you abusing it would just annoy me
 const whurl ="https://discord.com/api/webhooks/1204492141544345600/L6juWPsDzT9CgW8-wFuIcmqYIzgduJLRDPEOMdWx1meZ2SYLD1tSTdiy5WA1ID5pUre7"
@@ -233,6 +235,7 @@ function changecolor()
   document.getElementById("loose").style.color = colorPaletes[colorIndex].textcolor;
   document.getElementById("soundtoggletext").style.color = colorPaletes[colorIndex].textcolor;
   document.getElementById("vibrationtoggletext").style.color = colorPaletes[colorIndex].textcolor;
+  document.getElementById("timer").style.color = colorPaletes[colorIndex].textcolor;
   document.getElementById("changecolortext").style.color = colorPaletes[colorIndex].textcolor;
   trailcolor = colorPaletes[colorIndex].trailcolor;
   fallencolor = colorPaletes[colorIndex].fallencolor;
@@ -1583,6 +1586,7 @@ function closepchelp()
             document.getElementById("2display").style.width = "50px";
             document.getElementById("2display").style.height = "50px";
             document.getElementById("settings").style.position = "absolute";
+            document.getElementById("timer").style.position = "absolute";
             document.getElementById("settingsPage2").style.position = "absolute";
         
         window.addEventListener("keydown", event => {
@@ -1747,8 +1751,10 @@ function screenadjust()
     document.getElementById("2display").style.width = window.innerHeight / 6 + "px";
     document.getElementById("2display").style.top = window.innerHeight / 20 + "px";
     document.getElementById("settings").style.top = window.innerHeight / 20 + window.innerHeight / 6 + window.innerHeight / 40 + "px";
+    document.getElementById("timer").style.top = window.innerHeight / 20 + window.innerHeight / 6 + window.innerHeight / 5 + "px";
     document.getElementById("settings").style.height = window.innerHeight / 6 +  "px";
     document.getElementById("settings").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + window.innerHeight / 2.2 + window.innerWidth / 20 + "px";
+    document.getElementById("timer").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + window.innerHeight / 2.2 + window.innerWidth / 20 + "px";
     document.getElementById("2display").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + window.innerHeight / 2.2 + window.innerWidth / 20 + "px";
     document.getElementById("points").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + "px";
     document.getElementById("points").style.top = window.innerHeight / 20 + window.innerHeight / 1.2 + "px";
@@ -1761,6 +1767,8 @@ function screenadjust()
         document.getElementById("controlls").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerHeight / 2.2 - window.innerHeight / 15 + "px";
         document.getElementById("2display").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerHeight / 2.2 + window.innerWidth / 20 + "px";
         document.getElementById("settings").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerHeight / 2.2 + window.innerWidth / 20 + "px";
+        document.getElementById("settings").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerHeight / 2.2 + window.innerWidth / 20 + "px";
+        document.getElementById("timer").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerHeight / 2.2 + window.innerWidth / 20 + "px";
     }
     if (window.innerWidth / 2 - window.innerWidth / 2 + window.innerHeight / 2.2 + window.innerWidth / 20 + window.innerHeight / 6 > window.innerWidth)
     {
@@ -1771,11 +1779,25 @@ function screenadjust()
         document.getElementById("controlls").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerWidth / 1.5 - window.innerHeight / 15 + "px";
         document.getElementById("2display").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerWidth / 1.5 + "px";
         document.getElementById("settings").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerWidth / 1.5 + "px";
+        document.getElementById("timer").style.left = window.innerWidth / 2 - window.innerWidth / 2 + window.innerWidth / 1.35 + "px";
         document.getElementById("canvas").style.width = window.innerWidth / 1.5 + "px";
         document.getElementById("settingsPage2").style.width = window.innerWidth / 1.5 + "px";
         document.getElementById("2display").style.width = window.innerWidth / 4 + "px";
         document.getElementById("settings").style.width = window.innerWidth / 4 + "px";
     }
     
+}
+function timer()
+{
+  if (pause)
+  {
+  timeleft -= 1;
+  document.getElementById("timer").innerHTML = "time left <br>" + timeleft;
+  if (timeleft == 0)
+  {
+    document.getElementById("loosetext").innerHTML = "Time's up!<br>Mode: 5 minutes";
+    boardArr[1].exist = true;
+  }
+  }
 }
 changecolor();

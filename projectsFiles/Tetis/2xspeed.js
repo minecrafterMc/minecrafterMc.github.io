@@ -232,6 +232,7 @@ function changecolor()
   document.getElementById("body").style.backgroundColor = emptycolor;
   document.getElementById("loose").style.color = colorPaletes[colorIndex].textcolor;
   document.getElementById("soundtoggletext").style.color = colorPaletes[colorIndex].textcolor;
+  document.getElementById("vibrationtoggletext").style.color = colorPaletes[colorIndex].textcolor;
   document.getElementById("changecolortext").style.color = colorPaletes[colorIndex].textcolor;
   trailcolor = colorPaletes[colorIndex].trailcolor;
   fallencolor = colorPaletes[colorIndex].fallencolor;
@@ -275,6 +276,8 @@ function changecolor2()
   document.getElementById("loose").style.color = colorPaletes[colorIndex].textcolor;
   document.getElementById("soundtoggletext").style.color = colorPaletes[colorIndex].textcolor;
   document.getElementById("changecolortext").style.color = colorPaletes[colorIndex].textcolor;
+  document.getElementById("soundtoggletext").style.color = colorPaletes[colorIndex].textcolor;
+  document.getElementById("vibrationtoggletext").style.color = colorPaletes[colorIndex].textcolor;
   trailcolor = colorPaletes[colorIndex].trailcolor;
   fallencolor = colorPaletes[colorIndex].fallencolor;
   shapecolor = colorPaletes[colorIndex].shapecolor;
@@ -1398,6 +1401,11 @@ function fallenShape()
         i += 1;
     }
     playsound("blockFall.mp3")
+    if (!document.getElementById("vibrationtoggle").checked)
+    {
+
+      navigator.vibrate(100);
+    }
     shapetypeb = shapetypec;
     shapetypec = RandomInt(1,maxshapeid);
     generateShape(0,0,"dis");
