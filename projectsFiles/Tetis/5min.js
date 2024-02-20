@@ -1,3 +1,7 @@
+if (sessionStorage.getItem("name") == undefined)
+{
+  location.href = "bonusselect.html";
+}
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const nshapecanvas = document.getElementById("2display");
@@ -201,6 +205,7 @@ var shapeRotation = 1;
 var dir = 0;
 var fastdown = false;
 var IID = NaN;
+var falling = false;
 var shapetypec = RandomInt(1,maxshapeid);
 var timeleft = sessionStorage.getItem("time");
 var fallencolor = "#092529";
@@ -1605,6 +1610,7 @@ function closepchelp()
 }
     function setup()
     {   
+      closesettings();
         document.getElementById("controlls").style.display = "none";
         document.getElementById("controlls2").style.display = "none";
         document.getElementById("loose").style.display = "none";
@@ -1621,6 +1627,7 @@ function closepchelp()
                 document.getElementById("pchelp").style.position = "absolute";
                 document.getElementById("pchelp").style.top = window.innerHeight / 20 + "px";
                 document.getElementById("pchelp").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + "px";
+                document.getElementById("vibrationtoggletext").style.display = "none";
             }
             document.getElementById("canvas").style.position = "absolute";
              document.getElementById("loose").style.position = "absolute";
@@ -1653,6 +1660,7 @@ function closepchelp()
           window.addEventListener("keydown", event => {
             if (event.key == "s") {
               fastdown = true;
+              
             }
           });
           window.addEventListener("keydown", event => {
@@ -1702,7 +1710,7 @@ function closepchelp()
             }
             i += 1;
         }
-        closesettings();
+        
         }
         function fastfall()
         {
@@ -1715,6 +1723,7 @@ function closepchelp()
     else
     {
         clearInterval(IID);
+        falling = false;
     }
         }
 function tick() 
@@ -1737,12 +1746,17 @@ function tick()
     drawShape();
     if (fastdown)
     {
+      if (!falling)
+      {
         IID = setInterval(fastfall,50);
+        falling = true;
+      }
         fastdown = false;
     }
 if(checkFallShape())
     {
         fallenShape();
+        falling = false;
         generateShape(4,0);
         points += 50 * sessionStorage.getItem("pointmulti");
     }
@@ -1793,7 +1807,7 @@ function screenadjust()
     document.getElementById("controlls").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + window.innerHeight / 2.2 - window.innerHeight / 15 + "px";
     changebuttons(window.innerHeight / 15 + "px",window.innerHeight / 3.6 + "px")
     document.getElementById("canvas").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + "px";
-    document.getElementById("settingsPage2").style.left = window.innerWidth - window.innerWidth / 1.1 + "px";
+    document.getElementById("settingsPage2").style.left = window.innerWidth / 2 - window.innerWidth / 2.7 + "px";
     document.getElementById("canvas").style.height = window.innerHeight / 1.2 + "px";
     document.getElementById("canvas").style.width = window.innerHeight / 2.2 + "px";
     document.getElementById("settingsPage2").style.height = window.innerHeight / 1.2 + "px";
@@ -1843,16 +1857,25 @@ function timer()
   if (pause)
   {
   timeleft -= 1;
-  if (timeleft >= 0)
+  let livestext = "";
+  if (lives > 0)
   {
-  document.getElementById("timer").innerHTML = "time left <br>" + timeleft + "<br>lives left<br>" + lives;
+    livestext = lives;
   }
   else{
-    document.getElementById("timer").innerHTML = "lives left<br>" + lives;
+    livestext = "infinity ;)";
+  }
+  if (timeleft >= 0)
+  {
+  document.getElementById("timer").innerHTML = "time left <br>" + timeleft + "<br>lives left<br>" + livestext;
+  }
+  else{
+    document.getElementById("timer").innerHTML = "lives left<br>" + livestext;
   }
   if (timeleft == 0)
   {
     document.getElementById("loosetext").innerHTML = "Time's up!<br>Mode: " + sessionStorage.getItem("name");
+    lives = 1;
     boardArr[1].exist = true;
   }
   }
