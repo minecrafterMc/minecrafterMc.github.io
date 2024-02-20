@@ -7,25 +7,37 @@
   <title></title>
   <style>
     body{
-      background-color: #292929;
+      background: rgb(121,0,255);
+background: radial-gradient(circle, rgba(121,0,255,1) 0%, rgba(39,44,197,1) 16%, rgba(50,63,180,1) 30%, rgba(67,91,200,1) 50%, rgba(62,110,232,1) 63%, rgba(87,141,237,1) 78%, rgba(0,206,255,1) 100%);
       color: white;
     }
     button{
-      background-color: #105b66;
+      background-color: #f3ff08;
+      color: black;
+      width: 130px;
+      height: 65px;
+    }
+    .navigation{
+      background-color: #a103fc;
       color: white;
     }
-    
+    div{
+      width="500px";
+      height="500px";
+    }
   </style>
 </head>
 
 <body>
   <center>
-  <h1>TETIS</h1><br><h2>Bonus Mode Selection</h2><br><br>
-  <button onclick="window.location.href = '2xspeed.html'" >Double Speed</button><br><br><br>
-  <button onclick="window.location.href = '5min.html'">5 minutes</button><br><br><br><br>
-  <button>Load Custom Mode<br>(not coming in 2.0)</button><br><br><br>
-  <button onclick="window.location.href = 'mainmenu.html'" >Back To Main Menu</button>
+  <img width="350" src="TetisLogo.png"><br><h2>Bonus Mode Selection</h2><br><br>
+  <button class="navigation" onclick="openspeed()">category 1: speed</button><button class="navigation" onclick="opentime()">category 2: time</button><button class="navigation" onclick="opencustom()">category 3: custom</button><button class="navigation" onclick="openall()">open all</button><br><br><br>
+  <div id="speed"><button onclick="startcustommode(-1,125,'double speed',2,2,0,0)">Double Speed</button></div>
+  <div id="time"><button onclick="startcustommode(300,250,'5 minutes',2,1,500,20)">5 minutes</button><button onclick="startcustommode(60,250,'1 minute',1,1,0,0)">1 minute</button></div>
+  <div id="custom"><button>Load Custom Mode<br>(coming soon)</button></div><br><br><br>
+  <button class="navigation" onclick="window.location.href = 'mainmenu.html'" >Back To Main Menu</button>
   </center>
+  <script src="bonus.js"></script>
 </body>
 
 </html>

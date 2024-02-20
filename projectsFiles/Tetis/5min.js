@@ -114,69 +114,81 @@ class cell
         }
     }
 }
-var colorIndex = 1;
+var colorIndex = sessionStorage.getItem("colorid");
 var colorPaletes = [
-{
-  "name": "blue light mode",
-  "shapecolor": "cyan",
-  "emptycolor": "white",
-  "trailcolor": "lightblue",
-  "fallencolor": "grey",
-  "textcolor": "blue"
+  {
+    "name": "default",
+    "shapecolor": "#fc0303",
+    "emptycolor": "#039dfc",
+    "trailcolor": "#0877ff",
+    "fallencolor": "#ababab",
+    "textcolor": "white"
+    
 },
-{
-  "name": "ocean",
-  "shapecolor": "cyan",
-  "emptycolor": "darkblue",
-  "trailcolor": "lightblue",
-  "fallencolor": "grey",
-  "textcolor": "white"
+  {
+    "name": "ocean",
+    "shapecolor": "cyan",
+    "emptycolor": "darkblue",
+    "trailcolor": "lightblue",
+    "fallencolor": "grey",
+    "textcolor": "white"
 },
-{
-  "name": "default",
-  "shapecolor": "#105b66",
-  "emptycolor": "#292929",
-  "trailcolor": "#283d40",
-  "fallencolor": "#092529",
-  "textcolor": "white"
+  {
+    "name": "blue light mode",
+    "shapecolor": "cyan",
+    "emptycolor": "white",
+    "trailcolor": "lightblue",
+    "fallencolor": "grey",
+    "textcolor": "blue"
 },
-{
-  "name": "ultra dark mode",
-  "shapecolor": "darkgrey",
-  "emptycolor": "black",
-  "trailcolor": "grey",
-  "fallencolor": "lightgrey",
-  "textcolor": "white"
+  {
+    "name": "ultra dark mode",
+    "shapecolor": "darkgrey",
+    "emptycolor": "black",
+    "trailcolor": "grey",
+    "fallencolor": "lightgrey",
+    "textcolor": "white"
 },
-{
-  "name": "matrix",
-  "shapecolor": "green",
-  "emptycolor": "black",
-  "trailcolor": "lime",
-  "fallencolor": "darkgreen",
-  "textcolor": "white"
+  {
+    "name": "matrix",
+    "shapecolor": "green",
+    "emptycolor": "black",
+    "trailcolor": "lime",
+    "fallencolor": "darkgreen",
+    "textcolor": "white"
 },
-{
-  "name": "blue dark mode",
-  "shapecolor": "darkblue",
-  "emptycolor": "black",
-  "trailcolor": "blue",
-  "fallencolor": "grey",
-  "textcolor": "white"
+  {
+    "name": "blue dark mode",
+    "shapecolor": "darkblue",
+    "emptycolor": "black",
+    "trailcolor": "blue",
+    "fallencolor": "grey",
+    "textcolor": "white"
 },
-{
+  {
 
-  "name": "amogus",
-  "shapecolor": "red",
-  "emptycolor": "grey",
-  "trailcolor": "grey",
-  "fallencolor": "white",
-  "textcolor": "white"
+    "name": "amogus",
+    "shapecolor": "red",
+    "emptycolor": "grey",
+    "trailcolor": "grey",
+    "fallencolor": "white",
+    "textcolor": "white"
+},
+  {
+
+    "name": "1.5",
+    "shapecolor": "#105b66",
+    "emptycolor": "#292929",
+    "trailcolor": "#283d40",
+    "fallencolor": "#092529",
+    "textcolor": "white"
 }
 ]
+var maxcolor = colorPaletes.length - 1;
 var maxshapeid = 7;
 var cell1 = new cell(0,0,25,25,0,1,"blue");
 drawCell(cell1);
+var lives = sessionStorage.getItem("lives");
 var shapetype = 1;
 var shapetypeb = 1;
 var shape = [0];
@@ -190,7 +202,7 @@ var dir = 0;
 var fastdown = false;
 var IID = NaN;
 var shapetypec = RandomInt(1,maxshapeid);
-var timeleft = 300;
+var timeleft = sessionStorage.getItem("time");
 var fallencolor = "#092529";
 var emptycolor = "#292929";
 var trailcolor = "#283d40";
@@ -200,7 +212,7 @@ document.getElementById("body").style.backgroundColor = emptycolor;
 setup();
 generateShape(0,0,"dis");
 generateShape(4,0,"canvas");
-var tickID = setInterval(tick,250);
+var tickID = setInterval(tick,sessionStorage.getItem("speed"));
 var timerID = setInterval(timer,1000);
 setInterval(screenadjust,100);
 //whoever sees this, please dont abuse this link. this webhook is connected to my private discord server. you abusing it would just annoy me
@@ -221,11 +233,14 @@ function playsound(sound)
 }
 function changecolor()
 {
-  colorIndex += 1;
-  if (colorIndex > colorPaletes.length - 1 || colorIndex < 0)
+  colorIndex = Number(colorIndex) + 1;
+  if (Number(colorIndex) <= maxcolor)
   {
-    colorIndex = 0;
-  }
+    console.log("nie działam " + colorIndex + " " + maxcolor)
+    //colorIndex -= 1;
+    //return;
+  
+  
   document.getElementById("colorname").innerHTML = colorPaletes[colorIndex].name;
   document.getElementById("loose").style.backgroundColor = colorPaletes[colorIndex].emptycolor;
   document.getElementById("colorname").style.color = colorPaletes[colorIndex].textcolor;
@@ -262,13 +277,18 @@ function changecolor()
   
   refreshboard();
   drawShape();
+  sessionStorage.setItem("colorid", colorIndex);
+  }
+  else{
+    colorIndex = colorIndex - 1;
+  }
 }
 function changecolor2()
 {
   colorIndex -= 1;
   if (colorIndex < 0)
   {
-    colorIndex = colorPaletes.length - 1;
+    colorIndex = 0;
   }
   document.getElementById("colorname").innerHTML = colorPaletes[colorIndex].name;
   document.getElementById("loose").style.backgroundColor = colorPaletes[colorIndex].emptycolor;
@@ -279,6 +299,7 @@ function changecolor2()
   document.getElementById("loose").style.color = colorPaletes[colorIndex].textcolor;
   document.getElementById("soundtoggletext").style.color = colorPaletes[colorIndex].textcolor;
   document.getElementById("vibrationtoggletext").style.color = colorPaletes[colorIndex].textcolor;
+  document.getElementById("timer").style.color = colorPaletes[colorIndex].textcolor;
   document.getElementById("changecolortext").style.color = colorPaletes[colorIndex].textcolor;
   trailcolor = colorPaletes[colorIndex].trailcolor;
   fallencolor = colorPaletes[colorIndex].fallencolor;
@@ -303,6 +324,7 @@ function changecolor2()
   }
   refreshboard();
   drawShape();
+  sessionStorage.setItem("colorid", colorIndex);
 }
 function sendPoints()
 {
@@ -1229,6 +1251,8 @@ function checkLose()
   {
     if (boardArr[i].getExist())
     {
+      if (lives == 1)
+      {
       playsound("lose.mp3");
         clearInterval(tickID);
         document.getElementById("loose").style.display = "block";
@@ -1243,8 +1267,35 @@ function checkLose()
         sendPoints();
       }
       break;
+      }
+      else{
+        lives -= 1;
+        clearboard();
+      }
     }
     i += 1;
+  }
+}
+function clearboard()
+{
+  let i = 0;
+  while (i != 200)
+  {
+    if (boardArr[i].exist)
+    {
+      boardArr[i].exist = false;
+      boardArr[i].color = emptycolor;
+    }
+    i += 1;
+  }
+  points = points - Number(sessionStorage.getItem("penaltypoint"));
+  if (timeleft > 0)
+  {
+  timeleft = timeleft - Number(sessionStorage.getItem ("penaltytime"));
+  if (timeleft < 0)
+  {
+    timeleft = 1;
+  }
   }
 }
 function checkRows()
@@ -1275,7 +1326,7 @@ function checkRows()
                         a += 1;
                     }
                    
-                    points += 500;
+                    points += 500 * sessionStorage.getItem("pointmulti");
                     break;
                 }
                 column = 0;
@@ -1693,7 +1744,7 @@ if(checkFallShape())
     {
         fallenShape();
         generateShape(4,0);
-        points += 50;
+        points += 50 * sessionStorage.getItem("pointmulti");
     }
     smove(0,1);
   }
@@ -1714,7 +1765,7 @@ function onetick()
   {
     fallenShape();
     generateShape(4, 0);
-    points += 50;
+    points += 50 * sessionStorage.getItem("pointmulti");
   }
   smove(0, 1);
 }
@@ -1792,12 +1843,59 @@ function timer()
   if (pause)
   {
   timeleft -= 1;
-  document.getElementById("timer").innerHTML = "time left <br>" + timeleft;
+  if (timeleft >= 0)
+  {
+  document.getElementById("timer").innerHTML = "time left <br>" + timeleft + "<br>lives left<br>" + lives;
+  }
+  else{
+    document.getElementById("timer").innerHTML = "lives left<br>" + lives;
+  }
   if (timeleft == 0)
   {
-    document.getElementById("loosetext").innerHTML = "Time's up!<br>Mode: 5 minutes";
+    document.getElementById("loosetext").innerHTML = "Time's up!<br>Mode: " + sessionStorage.getItem("name");
     boardArr[1].exist = true;
   }
   }
 }
-changecolor();
+
+
+if (colorIndex > colorPaletes.length - 1)
+{
+  colorIndex = 0;
+}
+document.getElementById("loosetext").innerHTML = "YOU LOST<br>mode: " + sessionStorage.getItem("name");
+document.getElementById("colorname").innerHTML = colorPaletes[colorIndex].name;
+document.getElementById("loose").style.backgroundColor = colorPaletes[colorIndex].emptycolor;
+document.getElementById("colorname").style.color = colorPaletes[colorIndex].textcolor;
+document.getElementById("points").style.color = colorPaletes[colorIndex].textcolor;
+emptycolor = colorPaletes[colorIndex].emptycolor;
+document.getElementById("body").style.backgroundColor = emptycolor;
+document.getElementById("loose").style.color = colorPaletes[colorIndex].textcolor;
+document.getElementById("soundtoggletext").style.color = colorPaletes[colorIndex].textcolor;
+document.getElementById("vibrationtoggletext").style.color = colorPaletes[colorIndex].textcolor;
+document.getElementById("timer").style.color = colorPaletes[colorIndex].textcolor;
+document.getElementById("changecolortext").style.color = colorPaletes[colorIndex].textcolor;
+trailcolor = colorPaletes[colorIndex].trailcolor;
+fallencolor = colorPaletes[colorIndex].fallencolor;
+shapecolor = colorPaletes[colorIndex].shapecolor;
+recolor();
+displayshape2();
+generateShape(shape[0].bx, shape[0].by, "dis");
+srotate(-1);
+srotate(1);
+let i = 0;
+while (i != 200)
+{
+  if (boardArr[i].exist)
+  {
+    boardArr[i].color = fallencolor;
+  }
+  else {
+    boardArr[i].color = emptycolor;
+  }
+  drawCell(boardArr[i]);
+  i += 1;
+}
+
+
+timer();

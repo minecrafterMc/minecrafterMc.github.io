@@ -134,10 +134,10 @@ var colorPaletes = [
 },
 {
   "name": "default",
-  "shapecolor": "#105b66",
-  "emptycolor": "#292929",
-  "trailcolor": "#283d40",
-  "fallencolor": "#092529",
+  "shapecolor": "#fc0303",
+  "emptycolor": "#039dfc",
+  "trailcolor": "#0877ff",
+  "fallencolor": "#ababab",
   "textcolor": "white"
 },
 {
@@ -171,6 +171,16 @@ var colorPaletes = [
   "emptycolor": "grey",
   "trailcolor": "grey",
   "fallencolor": "white",
+  "textcolor": "white"
+},
+{
+
+  "name": "1.5",
+
+  "shapecolor": "#105b66",
+  "emptycolor": "#292929",
+  "trailcolor": "#283d40",
+  "fallencolor": "#092529",
   "textcolor": "white"
 }
 ]
