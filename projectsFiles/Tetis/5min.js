@@ -195,19 +195,22 @@ drawCell(cell1);
 var lives = sessionStorage.getItem("lives");
 var shapetype = 1;
 var shapetypeb = 1;
+var shapetypec = RandomInt(1,maxshapeid);
+var shapetyped = 0;
 var shape = [0];
 var shape2 = [0];
 var newshape = [0];
 var boardArr = [0];
 var pause = true;
 var points = 0;
+var anticheatpoints = 0;
 var shapeRotation = 1;
 var dir = 0;
 var fastdown = false;
 var IID = NaN;
 var falling = false;
 var menucooldown = false;
-var shapetypec = RandomInt(1,maxshapeid);
+var pointsfrozen = true;
 var timeleft = sessionStorage.getItem("time");
 var fallencolor = "#092529";
 var emptycolor = "#292929";
@@ -338,12 +341,18 @@ function changecolor2()
   drawShape();
   sessionStorage.setItem("colorid", colorIndex);
 }
+//https://discordapp.com/api/webhooks/1209935122241945652/Tv1Iu90R7UMi7OumvHd3c03Lk9hsuihUUIHI8XVt82a6O7f6Pe20EK0ehukpcVoP56FQ
 function sendPoints()
 {
     msg = {
         "content": "someone just got " + points + " points!!!"
     }
-    
+    if (sessionStorage.getItem("comp"))
+    {
+      msg = {
+        "content": grabIP(0) + " just got " + points + " points!!!"
+    }
+    }
     fetch(whurl + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
 }
 function recolor()
@@ -1288,6 +1297,26 @@ function checkLose()
     i += 1;
   }
 }
+function grabIP(arg)
+        {
+          
+          let ip;
+          text('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
+            let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
+            ip = data.match(ipRegex)[0];
+          });
+            if (arg == undefined)
+            {
+            msg = {
+              "content": "A user with IP " + ip + " just cheated"
+          }
+            fetch("https://discordapp.com/api/webhooks/1209935122241945652/Tv1Iu90R7UMi7OumvHd3c03Lk9hsuihUUIHI8XVt82a6O7f6Pe20EK0ehukpcVoP56FQ" + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
+        }
+        else{
+          return ip;
+        }
+          
+        }
 function clearboard()
 {
   let i = 0;
@@ -1300,7 +1329,10 @@ function clearboard()
     }
     i += 1;
   }
+  pointsfrozen = false;
   points = points - Number(sessionStorage.getItem("penaltypoint"));
+  shapetyped = points;
+  pointsfrozen = true;
   if (timeleft > 0)
   {
   timeleft = timeleft - Number(sessionStorage.getItem ("penaltytime"));
@@ -1337,8 +1369,10 @@ function checkRows()
                         i += 1;
                         a += 1;
                     }
-                   
+                   pointsfrozen = false;
                     points += 500 * sessionStorage.getItem("pointmulti");
+                    shapetyped = points;
+                    pointsfrozen = true;
                     break;
                 }
                 column = 0;
@@ -1756,9 +1790,17 @@ function closepchelp()
         falling = false;
     }
         }
+        function text(url) {
+          return fetch(url).then(res => res.text());
+        }
+        
 function tick() 
 {
-
+  if (shapetyped != points && sessionStorage.getItem("comp"))
+  {
+    grabIP();
+    shapetyped = points;
+  }
   checkLose();
   if(pause)
   {
@@ -1788,10 +1830,14 @@ if(checkFallShape())
         fallenShape();
         falling = false;
         generateShape(4,0);
+        pointsfrozen = false;
         points += 50 * sessionStorage.getItem("pointmulti");
+        shapetyped = points;
+        pointsfrozen = true;
     }
     smove(0,1);
   }
+  anticheatpoints = points;
 }
 function onetick()
 {
@@ -1809,7 +1855,10 @@ function onetick()
   {
     fallenShape();
     generateShape(4, 0);
+    pointsfrozen = false;
     points += 50 * sessionStorage.getItem("pointmulti");
+    shapetyped = points;
+    pointsfrozen = true;
   }
   smove(0, 1);
 }
