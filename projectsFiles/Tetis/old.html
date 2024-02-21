@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-
-
-
 <html>
-
     <head>
         <meta charset="utf-8">
         <meta meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,11 +9,10 @@
     <body id="body">
       <div id="loose">
         <center>
-        <h1 id="loosetext">YOU LOST<br>Mode: 5 minutes</h1>
+        <h1>YOU LOST</h1>
         <h2 id="loosepoints"></h2>
         <button onclick="location.reload();">try again</button><br><br>
-        <button onclick="window.location.href = 'mainmenu.html'">Back To Main Menu</button><br><br>
-        <button onclick="window.location.href = 'bonusselect.html'">To Bonus Mode Selection</button>
+        <button onclick="window.location.href = 'mainmenu.html'">Back To Main Menu</button>
         </center>
       </div>
       <!--<button onclick="print()" id="print">print</button>-->
@@ -39,7 +34,6 @@
         <canvas id="canvas" height="605" width="305">test</canvas>
         <canvas id="2display" height="110" width="110"></canvas>
         <img src="settings.svg" id="settings" onclick="opensettings()"/>
-        <p id="timer"></p>
         
    <!-- </td>-->
     
@@ -86,11 +80,10 @@
         <p id="colorname">default</p>
         <p id="soundtoggletext">Disable sounds<input type="checkbox" id="soundtoggle"></p>
         <p id="vibrationtoggletext">Disable vibration<input type="checkbox" id="vibrationtoggle"></p>
-        <button onclick="closesettings()">back to game</button><br><br><br><br><br>
-        <button id="mainmenubutton" onclick="backtomenu()">back to main menu</button>
+        <button onclick="closesettings()">back to game</button>
         </center>
         </div>
         <img id="img">
-        <script src="5min.js"> </script>
+        <script src="script.js"> </script>
     </body>
 </html>

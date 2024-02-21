@@ -1,6 +1,6 @@
 if (sessionStorage.getItem("name") == undefined)
 {
-  location.href = "bonusselect.html";
+  location.href = "index.html";
 }
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -206,6 +206,7 @@ var dir = 0;
 var fastdown = false;
 var IID = NaN;
 var falling = false;
+var menucooldown = false;
 var shapetypec = RandomInt(1,maxshapeid);
 var timeleft = sessionStorage.getItem("time");
 var fallencolor = "#092529";
@@ -220,6 +221,13 @@ generateShape(4,0,"canvas");
 var tickID = setInterval(tick,sessionStorage.getItem("speed"));
 var timerID = setInterval(timer,1000);
 setInterval(screenadjust,100);
+if (sessionStorage.getItem("soundtoggle") == true)
+{
+  document.getElementById("soundtoggle").checked = true;
+}
+else {
+  document.getElementById("soundtoggle").checked = false;
+}
 //whoever sees this, please dont abuse this link. this webhook is connected to my private discord server. you abusing it would just annoy me
 const whurl ="https://discord.com/api/webhooks/1204492141544345600/L6juWPsDzT9CgW8-wFuIcmqYIzgduJLRDPEOMdWx1meZ2SYLD1tSTdiy5WA1ID5pUre7"
 
@@ -241,7 +249,6 @@ function changecolor()
   colorIndex = Number(colorIndex) + 1;
   if (Number(colorIndex) <= maxcolor)
   {
-    console.log("nie działam " + colorIndex + " " + maxcolor)
     //colorIndex -= 1;
     //return;
   
@@ -1552,11 +1559,17 @@ function opensettings()
 {
     pause = false;
     document.getElementById("settingsPage2").style.display = "block";
+    document.getElementById("controlls").style.display = "none";
+    document.getElementById("controlls2").style.display = "none";
 }
 function closesettings()
 {
   pause = true;
   document.getElementById("settingsPage2").style.display = "none";
+  sessionStorage.setItem("soundtoggle", document.getElementById("soundtoggle").checked);
+  sessionStorage.setItem("vibrationtoggle", document.getElementById("vibrationtoggle").checked);
+  document.getElementById("controlls").style.display = "block";
+  document.getElementById("controlls2").style.display = "block";
 }
 const getValueByIndex = (object, index) => {
 
@@ -1603,6 +1616,22 @@ function cellcheck(x,y)
     
     return ret;
 }
+function backtomenu() {
+  if (menucooldown)
+  {
+    location.href = "index.html"
+  }
+  else{
+    menucooldown = true;
+    document.getElementById("mainmenubutton").innerHTML = "Are You Sure?";
+    setTimeout(menutimeout,5000)
+  }
+}
+function menutimeout()
+{
+  menucooldown = false;
+  document.getElementById("mainmenubutton").innerHTML = "Back To Main Menu";
+}
 function closepchelp()
 {
     pause = true;
@@ -1610,7 +1639,7 @@ function closepchelp()
 }
     function setup()
     {   
-      closesettings();
+     closesettings();
         document.getElementById("controlls").style.display = "none";
         document.getElementById("controlls2").style.display = "none";
         document.getElementById("loose").style.display = "none";
@@ -1678,6 +1707,7 @@ function closepchelp()
               pause2();
             }
           });
+          
     let i = 0;
     let a = 1;
     let b = 0;
@@ -1858,19 +1888,23 @@ function timer()
   {
   timeleft -= 1;
   let livestext = "";
-  if (lives > 0)
+  if (lives > 1)
   {
-    livestext = lives;
+    livestext = "lives left<br>" + lives;
+  }
+  else if (lives == 1)
+  {
+    livestext = "";
   }
   else{
-    livestext = "infinity ;)";
+    livestext = "lives left<br>infinity ;)";
   }
   if (timeleft >= 0)
   {
-  document.getElementById("timer").innerHTML = "time left <br>" + timeleft + "<br>lives left<br>" + livestext;
+  document.getElementById("timer").innerHTML = "time left <br>" + timeleft + "<br>" + livestext;
   }
   else{
-    document.getElementById("timer").innerHTML = "lives left<br>" + livestext;
+    document.getElementById("timer").innerHTML = livestext;
   }
   if (timeleft == 0)
   {

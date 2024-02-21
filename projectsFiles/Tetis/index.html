@@ -1,89 +1,58 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link rel="stylesheet" href="style.css">
-        <title></title>
-    </head>
-    <body id="body">
-      <div id="loose">
-        <center>
-        <h1>YOU LOST</h1>
-        <h2 id="loosepoints"></h2>
-        <button onclick="location.reload();">try again</button><br><br>
-        <button onclick="window.location.href = 'mainmenu.html'">Back To Main Menu</button>
-        </center>
-      </div>
-      <!--<button onclick="print()" id="print">print</button>-->
-        <center>
-            <table>
-              <tr>
-              <td>
-              <div id="controlls2">
-                <button onclick="srotate(-1);" class="buttons">l rot</button>
-               
-                <br>
-          <button onclick='smove(-1,0)' id="left" class="buttons">left</button>
-        <br>
-         <button onclick="pause2();" class="buttons">pause</button>
-        </td>
-              </div>
-                <!--<td>-->
-                  
-        <canvas id="canvas" height="605" width="305">test</canvas>
-        <canvas id="2display" height="110" width="110"></canvas>
-        <img src="settings.svg" id="settings" onclick="opensettings()"/>
-        
-   <!-- </td>-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+    body{
+      background: rgb(121,0,255);
+background: radial-gradient(circle, rgba(121,0,255,1) 0%, rgba(39,44,197,1) 16%, rgba(50,63,180,1) 30%, rgba(67,91,200,1) 50%, rgba(62,110,232,1) 63%, rgba(87,141,237,1) 78%, rgba(0,206,255,1) 100%);
+      color: white;
+    }
+    button{
+      background-color: #f3ff08;
+      color: black;
+      width: 130px;
+      height: 65px;
+    }
     
-  
-        <h2 id="points"></h2>
-        <div id="controlls">
-            
-        <!--<td>-->
-           <button onclick="srotate(1)" class="buttons">r rot</button>
-        
-        <br>
-       <button onclick='smove(1,0)' id="right" class="buttons">right</button>
-        <br>
-        <button onclick='fastdown = true;' id="down" class="buttons">down</button>
-        </div>
-        <!--</td>
-        </tr>-->
-        
-            </table>
-        </center>
-        <br>
-        <center>
-        <tr>
-        
-        <br>
-        <br>
-       
-        <button  id="pchelp" onclick="closepchelp()">
-        <p>pc controlls:<br>
-        a - move shape left<br>
-        d - move shape right<br>
-        s - make the shape fall to the bottom<br>
-        left arrow - rotate shape left<br>
-        right arrow - rotate shape right<br>
-        e - pause<br>click to close</p>
-        </button>
-    </tr>
-    
-        </center>
-        <div id="settingsPage2">
-        <center>
-          <p id="changecolortext">change colors</p>
-        <button style="width: 40px; height: 40px;" onclick="changecolor2()"><--</button>   <button style="width: 40px; height: 40px;" onclick="changecolor()">--></button><br>
-        <p id="colorname">default</p>
-        <p id="soundtoggletext">Disable sounds<input type="checkbox" id="soundtoggle"></p>
-        <p id="vibrationtoggletext">Disable vibration<input type="checkbox" id="vibrationtoggle"></p>
-        <button onclick="closesettings()">back to game</button>
-        </center>
-        </div>
-        <img id="img">
-        <script src="script.js"> </script>
-    </body>
+  </style>
+</head>
+
+<body>
+  <center>
+  <img width="350" src="TetisLogo.png"><br><br><br>
+  <button onclick="startcustommode(-1,250,'classic',1,1,0,0)">Play Classic</button><br><br><br><br><br>
+  <button onclick="window.location.href = 'bonusselect.html'" style="background-color: #a103fc; color: white;">Bonus Modes</button><br><br><br><br><br>
+  <button style="background-color: #a103fc; color: white;">Mode Editor<br>(coming soon)</button>
+  </center>
+  <script>
+    function startcustommode(time,speed,name,lives,multi,pointpenalty,timepenalty)
+{
+  sessionStorage.setItem("time", time);
+  sessionStorage.setItem("speed", speed);
+  sessionStorage.setItem("name", name);
+  sessionStorage.setItem("lives", lives);
+  sessionStorage.setItem("pointmulti", multi);
+  sessionStorage.setItem("penaltypoint", pointpenalty);
+  sessionStorage.setItem("penaltytime", timepenalty);
+  window.location.href = '5min.html';
+}
+if (sessionStorage.getItem("colorid") == undefined)
+{
+  sessionStorage.setItem("colorid", 0);
+}
+if (sessionStorage.getItem("soundtoggle") == undefined)
+{
+  sessionStorage.setItem("soundtoggle", true);
+}
+if (sessionStorage.getItem("vibrationtoggle") == undefined)
+{
+  sessionStorage.setItem("vibrationtoggle", false);
+}
+  </script>
+</body>
+
 </html>

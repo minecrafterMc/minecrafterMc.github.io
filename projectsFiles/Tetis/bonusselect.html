@@ -31,11 +31,45 @@ background: radial-gradient(circle, rgba(121,0,255,1) 0%, rgba(39,44,197,1) 16%,
 <body>
   <center>
   <img width="350" src="TetisLogo.png"><br><h2>Bonus Mode Selection</h2><br><br>
-  <button class="navigation" onclick="openspeed()">category 1: speed</button><button class="navigation" onclick="opentime()">category 2: time</button><button class="navigation" onclick="opencustom()">category 3: custom</button><button class="navigation" onclick="openall()">open all</button><br><br><br>
-  <div id="speed"><button onclick="startcustommode(-1,125,'double speed',2,2,0,0)">Double Speed</button></div>
+  <table>
+    <tr>
+      <td>
+  <button class="navigation" onclick="openfeatured()">category 1: featured</button>
+  </td>
+  <td>
+  <button class="navigation" onclick="openspeed()">category 2: speed</button>
+  </td>
+    </tr>
+    <tr>
+      <td>
+  <button class="navigation" onclick="opentime()">category 3: time</button>
+      </td>
+      <td>
+  <button class="navigation" onclick="opencustom()">category 4: custom</button>
+      </td>
+    </tr>
+    <tr>
+      <td>
+  <button class="navigation" onclick="openall()">open all</button>
+      </td>
+      <td>
+        <button class="navigation" onclick="closeall()">close all</button>
+      </td>
+    </tr>
+  <br>
+  </table>
+  <br><br>
+  <div id="featured"><button onclick="startcustommode(-1,300,'Easy',2,0.5,0,0)">Easy Mode</button><button onclick="startcustommode(-1,250,'Infinite',-1,1,0,0)">Infinite</button></div>
+  <div id="speed"><button onclick="startcustommode(-1,125,'double speed',2,2,0,0)">Double Speed</button><button onclick="startcustommode(120,80,'hyper speed',10,3,1500,0)">Hyper Speed</button></div>
   <div id="time"><button onclick="startcustommode(300,250,'5 minutes',2,1,500,20)">5 minutes</button><button onclick="startcustommode(60,250,'1 minute',1,1,0,0)">1 minute</button></div>
-  <div id="custom"><button>Load Custom Mode<br>(coming soon)</button></div><br><br><br>
-  <button class="navigation" onclick="window.location.href = 'mainmenu.html'" >Back To Main Menu</button>
+  <div id="custom"><button>Start Custom Mode<br>(coming soon)</button><div id="customeditor">
+    <h3>custom mode editor</h3>
+    <p>name:</p><input type="text" id="name"><br>
+    <p>how many updates per sec?</p><input type="number" id="fps"><br>
+    <p>time limit (in sec):</p><input type="number" id="timelimit"><br>
+    
+    </div></div><br><br><br>
+  <button class="navigation" onclick="window.location.href = 'index.html'" >Back To Main Menu</button>
   </center>
   <script src="bonus.js"></script>
 </body>
