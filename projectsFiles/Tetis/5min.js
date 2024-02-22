@@ -2,6 +2,20 @@ if (sessionStorage.getItem("name") == undefined)
 {
   location.href = "index.html";
 }
+async function tournament()
+{
+if (sessionStorage.getItem("comp"))
+{
+  let list;
+  list = await FetchTournamentList();
+  let thisname = sessionStorage.getItem("name");
+  if (!list.thisname)
+  {
+    location.href = "index.html";
+  }
+}
+}
+tournament();
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const nshapecanvas = document.getElementById("2display");
@@ -248,7 +262,7 @@ function playsound(sound)
   }
 }
 async function FetchTournamentList() {
-  let response = await fetch("https://minecraftermc.github.io/projectFiles/Tetis/tournaments.json");
+  let response = await fetch("https://minecraftermc.github.io/projectsFiles/Tetis/tournaments.json");
   let tournaments = await response.json();
   console.log(tournaments);
   return tournaments;

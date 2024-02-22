@@ -45,7 +45,7 @@ function closeall()
   document.getElementById("featured").style.display = "none";
   document.getElementById("speed").style.display = "none";
 }
-function startcustommode(time,speed,name,lives,multi,pointpenalty,timepenalty)
+function startcustommode(time,speed,name,lives,multi,pointpenalty,timepenalty,comp)
 {
   sessionStorage.setItem("time", time);
   sessionStorage.setItem("speed", speed);
@@ -54,6 +54,7 @@ function startcustommode(time,speed,name,lives,multi,pointpenalty,timepenalty)
   sessionStorage.setItem("pointmulti", multi);
   sessionStorage.setItem("penaltypoint", pointpenalty);
   sessionStorage.setItem("penaltytime", timepenalty);
+  sessionStorage.setItem("comp", comp);
   window.location.href = '5min.html';
 }
 if (sessionStorage.getItem("colorid") == undefined)
