@@ -61,4 +61,3 @@ if (sessionStorage.getItem("colorid") == undefined)
 {
   sessionStorage.setItem("colorid", 0);
 }
-//hi
