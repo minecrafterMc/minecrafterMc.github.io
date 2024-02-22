@@ -9,13 +9,18 @@ if (sessionStorage.getItem("comp"))
   let list;
   list = await FetchTournamentList();
   let thisname = sessionStorage.getItem("name");
-  if (!list.thisname)
+  console.log(thisname);
+  console.log(list);
+  if (!list[thisname].running)
   {
     location.href = "index.html";
   }
+  else{
+    runID = RandomInt(1,99999);
+  }
 }
 }
-tournament();
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const nshapecanvas = document.getElementById("2display");
@@ -204,10 +209,12 @@ var colorPaletes = [
 ]
 var maxcolor = colorPaletes.length - 1;
 var maxshapeid = 7;
+var runID;
 var cell1 = new cell(0,0,25,25,0,1,"blue");
 drawCell(cell1);
 var lives = sessionStorage.getItem("lives");
 var shapetype = 1;
+var ip;
 var shapetypeb = 1;
 var shapetypec = RandomInt(1,maxshapeid);
 var shapetyped = 0;
@@ -233,6 +240,7 @@ var shapecolor = "#105b66";
 var outlinecolor = "black";
 document.getElementById("body").style.backgroundColor = emptycolor;
 setup();
+tournament();
 generateShape(0,0,"dis");
 generateShape(4,0,"canvas");
 var tickID = setInterval(tick,sessionStorage.getItem("speed"));
@@ -370,8 +378,15 @@ function sendPoints()
     }
     if (sessionStorage.getItem("comp"))
     {
+      
+
+          text('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
+
+            let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
+            ip = data.match(ipRegex)[0];
+          });
       msg = {
-        "content": grabIP(0) + " just got " + points + " points!!!"
+        "content": ip + " just got " + points + " points! RunID = " + runID
     }
     }
     fetch(whurl + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
@@ -1321,7 +1336,6 @@ function checkLose()
 function grabIP(arg)
         {
           
-          let ip;
           text('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
             let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
             ip = data.match(ipRegex)[0];
@@ -1329,7 +1343,7 @@ function grabIP(arg)
             if (arg == undefined)
             {
             msg = {
-              "content": "A user with IP " + ip + " just cheated"
+              "content": "A user with IP " + ip + " just cheated (" + runID + ")"
           }
             fetch("https://discordapp.com/api/webhooks/1209935122241945652/Tv1Iu90R7UMi7OumvHd3c03Lk9hsuihUUIHI8XVt82a6O7f6Pe20EK0ehukpcVoP56FQ" + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
         }

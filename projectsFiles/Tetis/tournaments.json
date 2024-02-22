@@ -1,3 +1,11 @@
 {
-  "HRPG x Cloudy Games Tournament": true
+  "HRPG x Cloudy Games Tournament": {
+    "running": true,
+    "time": -1,
+    "speed": 250,
+    "lives": 2,
+    "multi": 1,
+    "ppenalty": 0,
+    "tpenalty": 0
+  }
 }
