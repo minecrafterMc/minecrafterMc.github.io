@@ -247,6 +247,13 @@ function playsound(sound)
   audio.play();
   }
 }
+async function FetchTournamentList() {
+  let response = await fetch("https://minecraftermc.github.io/projectFiles/Tetis/tournaments.json");
+  let tournaments = await response.json();
+  console.log(tournaments);
+  return tournaments;
+}
+
 function changecolor()
 {
   colorIndex = Number(colorIndex) + 1;
