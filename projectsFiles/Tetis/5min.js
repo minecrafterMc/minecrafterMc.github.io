@@ -9,14 +9,13 @@ if (sessionStorage.getItem("comp"))
   let list;
   list = await FetchTournamentList();
   let thisname = sessionStorage.getItem("name");
-  console.log(thisname);
-  console.log(list);
-  if (!list[thisname].running)
+  if (!list[thisname].running || list[thisname].time != sessionStorage.getItem("time") || list[thisname].speed != sessionStorage.getItem("speed") || list[thisname].multi != sessionStorage.getItem("pointmulti") || list[thisname].ppenalty != sessionStorage.getItem("penaltypoint") || list[thisname].tpenalty != sessionStorage.getItem("penaltytime"))
   {
     location.href = "index.html";
   }
   else{
     runID = RandomInt(1,99999);
+    username = sessionStorage.getItem("dcname");
   }
 }
 }
@@ -215,6 +214,10 @@ drawCell(cell1);
 var lives = sessionStorage.getItem("lives");
 var shapetype = 1;
 var ip;
+text('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
+  let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
+  ip = data.match(ipRegex)[0];
+});
 var shapetypeb = 1;
 var shapetypec = RandomInt(1,maxshapeid);
 var shapetyped = 0;
@@ -272,7 +275,6 @@ function playsound(sound)
 async function FetchTournamentList() {
   let response = await fetch("https://minecraftermc.github.io/projectsFiles/Tetis/tournaments.json");
   let tournaments = await response.json();
-  console.log(tournaments);
   return tournaments;
 }
 
@@ -386,7 +388,7 @@ function sendPoints()
             ip = data.match(ipRegex)[0];
           });
       msg = {
-        "content": ip + " just got " + points + " points! RunID = " + runID
+        "content":"-----\n" + ip + " just got " + points + " points! RunID = " + runID + " username: " + username + "\n-----"
     }
     }
     fetch(whurl + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
@@ -1336,20 +1338,12 @@ function checkLose()
 function grabIP(arg)
         {
           
-          text('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
-            let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
-            ip = data.match(ipRegex)[0];
-          });
-            if (arg == undefined)
-            {
+          
+            
             msg = {
-              "content": "A user with IP " + ip + " just cheated (" + runID + ")"
-          }
+              "content": "--------\n"+ username + " with IP " + ip + " just cheated (" + runID + ")\n--------"
+            }
             fetch("https://discordapp.com/api/webhooks/1209935122241945652/Tv1Iu90R7UMi7OumvHd3c03Lk9hsuihUUIHI8XVt82a6O7f6Pe20EK0ehukpcVoP56FQ" + "?wait=true", {"method":"POST", "headers": {"content-type": "application/json"},"body": JSON.stringify(msg)});
-        }
-        else{
-          return ip;
-        }
           
         }
 function clearboard()
