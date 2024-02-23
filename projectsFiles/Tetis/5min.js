@@ -1675,7 +1675,7 @@ const getValueByIndex = (object, index) => {
   return Object.values(object)[index];
 
 };
-var Points = 0;
+var ponits = 0;
 
 function getObjectLength(object) {
   let objectLength = Object.keys(object).length;
@@ -1875,10 +1875,6 @@ function text(url) {
 
 function tick()
 {
-  if (anticheatpoints != Points && sessionStorage.getItem("comp"))
-  {
-    location.href = "index.html"
-  }
   checkLose();
   if (pause)
   {
