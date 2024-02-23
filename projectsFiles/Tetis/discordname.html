@@ -6,22 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
   <style>
-    body{
-      background: rgb(121,0,255);
-background: radial-gradient(circle, rgba(121,0,255,1) 0%, rgba(39,44,197,1) 16%, rgba(50,63,180,1) 30%, rgba(67,91,200,1) 50%, rgba(62,110,232,1) 63%, rgba(87,141,237,1) 78%, rgba(0,206,255,1) 100%);
+    body {
+      background: rgb(121, 0, 255);
+      background: radial-gradient(circle, rgba(121, 0, 255, 1) 0%, rgba(39, 44, 197, 1) 16%, rgba(50, 63, 180, 1) 30%, rgba(67, 91, 200, 1) 50%, rgba(62, 110, 232, 1) 63%, rgba(87, 141, 237, 1) 78%, rgba(0, 206, 255, 1) 100%);
       color: white;
     }
-    button{
+
+    button {
       background-color: #f3ff08;
       color: black;
       width: 130px;
       height: 65px;
     }
-    .navigation{
+
+    .navigation {
       background-color: #a103fc;
       color: white;
     }
-    div{
+
+    div {
       width="500px";
       height="500px";
     }
@@ -30,32 +33,37 @@ background: radial-gradient(circle, rgba(121,0,255,1) 0%, rgba(39,44,197,1) 16%,
 
 <body>
   <center>
-  <img width="350" src="TetisLogo.png"><br><h2>Enter Tournament</h2><br><h2>Turniej</h2><br><p>ENG: <br>if you want to recieve rewards from this tournament, you need to enter your discord name. if you don't want to recieve rewards, just leave this space empty<br>PL: <br>jeśli chcesz dostawać nagrody z tego turnieju, podaj nazwę swojego profilu discord. jeśli nie chcesz dostawać nagród, zostaw to pole puste</p>
-  <input id="discordname"><br><br>
-  <button onclick="startcustommode(180,250,'HRPG x Cloudy Games Tournament',2,1,500,0,true)">confirm</button>
-  <br><br><br>
-  <button class="navigation" onclick="window.location.href = 'index.html'" >Back To Main Menu</button>
+    <img width="350" src="TetisLogo.png"><br>
+    <h2>Enter Tournament</h2><br>
+    <h2>Turniej</h2><br>
+    <p>ENG: <br>if you want to recieve rewards from this tournament, you need to enter your discord name. if you don't want to recieve rewards, just leave this space empty<br>PL: <br>jeśli chcesz dostawać nagrody z tego turnieju, podaj nazwę swojego profilu discord. jeśli nie chcesz dostawać nagród, zostaw to pole puste</p><br>
+    <h3>Warning/Uwaga!<br>ENG:<br>The tournament is not live yet. You can press confirm to play, but your points will not be sent to the server.<br>PL: <br>Turniej się jeszcze nie rozpoczął . Możesz kliknąć "confirm" żeby zagrać, ale twoje punkty nie będą się liczyć do uzyskania nagrody</h3>
+    <h2>In collaboration with:<a href="https://discord.com/invite/5aDvB7ZM">HRPG</a><br>W kolaboracji z:<a href="https://discord.com/invite/5aDvB7ZM">HRPG</a></h2>
+    <input id="discordname"><br><br>
+    <button onclick="startcustommode(180,250,'HRPG x Cloudy Games Tournament Training',2,1,500,0,false)">confirm</button>
+    <br><br><br>
+    <button class="navigation" onclick="window.location.href = 'index.html'">Back To Main Menu</button>
   </center>
   <script>
-    function startcustommode(time,speed,name,lives,multi,pointpenalty,timepenalty,comp)
-{
-  if (document.getElementById("discordname").value != "")
-  {
-    sessionStorage.setItem("dcname", document.getElementById("discordname").value);
-  }
-  else{
-    sessionStorage.setItem("dcname", "!---!noname!---!");
-  }
-  sessionStorage.setItem("time", time);
-  sessionStorage.setItem("speed", speed);
-  sessionStorage.setItem("name", name);
-  sessionStorage.setItem("lives", lives);
-  sessionStorage.setItem("pointmulti", multi);
-  sessionStorage.setItem("penaltypoint", pointpenalty);
-  sessionStorage.setItem("penaltytime", timepenalty);
-  sessionStorage.setItem("comp", comp);
-  window.location.href = '5min.html';
-}
+    function startcustommode(time, speed, name, lives, multi, pointpenalty, timepenalty, comp)
+    {
+      if (document.getElementById("discordname").value != "")
+      {
+        sessionStorage.setItem("dcname", document.getElementById("discordname").value);
+      }
+      else {
+        sessionStorage.setItem("dcname", "!---!noname!---!");
+      }
+      sessionStorage.setItem("time", time);
+      sessionStorage.setItem("speed", speed);
+      sessionStorage.setItem("name", name);
+      sessionStorage.setItem("lives", lives);
+      sessionStorage.setItem("pointmulti", multi);
+      sessionStorage.setItem("penaltypoint", pointpenalty);
+      sessionStorage.setItem("penaltytime", timepenalty);
+      sessionStorage.setItem("comp", comp);
+      window.location.href = '5min.html';
+    }
   </script>
 </body>
 
