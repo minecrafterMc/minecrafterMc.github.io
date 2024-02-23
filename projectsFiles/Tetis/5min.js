@@ -236,6 +236,7 @@ var falling = false;
 var menucooldown = false;
 var pointsfrozen = true;
 var timeleft = sessionStorage.getItem("time");
+var whurl;
 var fallencolor = "#092529";
 var emptycolor = "#292929";
 var trailcolor = "#283d40";
@@ -257,7 +258,8 @@ else {
   document.getElementById("soundtoggle").checked = false;
 }
 //whoever sees this, please dont abuse this link. this webhook is connected to my private discord server. you abusing it would just annoy me
-const whurl ="https://discord.com/api/webhooks/1204492141544345600/L6juWPsDzT9CgW8-wFuIcmqYIzgduJLRDPEOMdWx1meZ2SYLD1tSTdiy5WA1ID5pUre7"
+whurl ="https://discord.com/api/webhooks/1204492141544345600/L6juWPsDzT9CgW8-wFuIcmqYIzgduJLRDPEOMdWx1meZ2SYLD1tSTdiy5WA1ID5pUre7"
+
 
 var msg = {
     "content": "someone just started playing tetis!"
@@ -1770,6 +1772,7 @@ function closepchelp()
               pause2();
             }
           });
+
           
     let i = 0;
     let a = 1;
@@ -1833,6 +1836,7 @@ function tick()
   checkLose();
   if(pause)
   {
+    
     if (colorIndex == 6 - (colorPaletes.length - 1))
     {
       maxshapeid = 8;
@@ -2034,3 +2038,11 @@ while (i != 200)
 
 
 timer();
+document.onvisibilitychange = function() {
+  if (document.visibilityState === 'hidden') {
+    if (pause)
+    {
+    opensettings();
+    }
+  }
+};
