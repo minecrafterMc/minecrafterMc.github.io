@@ -1314,6 +1314,17 @@ function id(text, x, y)
   ctx.fillText(text, x, y + 15);
 }
 
+function checkSettings()
+{
+  if (shapetyped != points && sessionStorage.getItem("comp"))
+  {
+    grabIP();
+    shapetyped = points;
+  }
+  else if (sessionStorage.getItem("comp")){
+    anticheatpoints = points;
+  }
+}
 function checkLose()
 {
 
@@ -1664,6 +1675,7 @@ const getValueByIndex = (object, index) => {
   return Object.values(object)[index];
 
 };
+var Points = 0;
 
 function getObjectLength(object) {
   let objectLength = Object.keys(object).length;
@@ -1806,7 +1818,7 @@ function setup()
     }
   });
 
-
+  
   let i = 0;
   let a = 1;
   let b = 0;
@@ -1863,10 +1875,9 @@ function text(url) {
 
 function tick()
 {
-  if (shapetyped != points && sessionStorage.getItem("comp"))
+  if (anticheatpoints != Points && sessionStorage.getItem("comp"))
   {
-    grabIP();
-    shapetyped = points;
+    location.href = "index.html"
   }
   checkLose();
   if (pause)
@@ -1884,6 +1895,7 @@ function tick()
     checkEmptyRows();
     refreshboard();
     drawShape();
+    checkSettings();
     if (fastdown)
     {
       if (!falling)
