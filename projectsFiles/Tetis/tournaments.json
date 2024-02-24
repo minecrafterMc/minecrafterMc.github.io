@@ -1,6 +1,6 @@
 {
   "HRPG x Cloudy Games Tournament": {
-    "running": false,
+    "running": true,
     "time": 180,
     "speed": 250,
     "lives": 2,
