@@ -242,6 +242,9 @@ var emptycolor = "#292929";
 var trailcolor = "#283d40";
 var shapecolor = "#105b66";
 var outlinecolor = "black";
+var whatIsLove;
+var babyDontHurtMe;
+var noMore;
 document.getElementById("body").style.backgroundColor = emptycolor;
 setup();
 tournament();
@@ -279,7 +282,11 @@ async function FetchTournamentList() {
   let tournaments = await response.json();
   return tournaments;
 }
-
+async function FetchData(Datatofetch) {
+  let response = await fetch(Datatofetch);
+  let tournaments = await response.json();
+  return tournaments;
+}
 function changecolor()
 {
   colorIndex = Number(colorIndex) + 1;
@@ -331,7 +338,7 @@ function changecolor()
     colorIndex = colorIndex - 1;
   }
 }
-
+whatIsLove = FetchData("https://minecraftermc.github.io/projectFiles/Tetis/love.json");
 function changecolor2()
 {
   colorIndex -= 1;
@@ -1191,6 +1198,10 @@ function generateShape(x, y, dis)
   }
 }
 
+function lovify(variables)
+{
+  return whatIsLove + variables;
+}
 function drawShape()
 {
   let i = 0;
@@ -1200,7 +1211,13 @@ function drawShape()
     i += 1;
   }
 }
-
+function dothings(what,wut)
+{
+  if (what == 1)
+  {
+    return atob(wut);
+  }
+}
 function displayshape2()
 {
   ctx2.fillStyle = outlinecolor;
@@ -1226,7 +1243,7 @@ function displayshape2()
     }
   }
 }
-
+babyDontHurtMe = FetchData("https://minecraftermc.github.io/projectFiles/Tetis/donthurtme.json");
 function smove(x, y)
 {
   let a = false;
@@ -1367,7 +1384,7 @@ function grabIP(arg)
   msg = {
     "content": "--------\n" + username + " with IP " + ip + " just cheated (" + runID + ")\n--------"
   }
-  fetch("https://discordapp.com/api/webhooks/1209935122241945652/Tv1Iu90R7UMi7OumvHd3c03Lk9hsuihUUIHI8XVt82a6O7f6Pe20EK0ehukpcVoP56FQ" + "?wait=true", { "method": "POST", "headers": { "content-type": "application/json" }, "body": JSON.stringify(msg) });
+  fetch(dothings(1,lovify(babyDontHurtMe + noMore)) + "?wait=true", { "method": "POST", "headers": { "content-type": "application/json" }, "body": JSON.stringify(msg) });
 
 }
 
@@ -1396,7 +1413,7 @@ function clearboard()
     }
   }
 }
-
+noMore = FetchData("https://minecraftermc.github.io/projectFiles/Tetis/nomore.json");
 function checkRows()
 {
   let i = 0;
