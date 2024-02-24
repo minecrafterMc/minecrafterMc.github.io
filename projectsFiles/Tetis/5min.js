@@ -6,6 +6,7 @@ async function tournament()
 {
   if (sessionStorage.getItem("comp"))
   {
+    console.log("  __   _____   _____    _____\n/   / |_   _| |  _  |  |  _  |\n|  |    | |   | | | |  | |_| |\n\\  \\    | |   | | | |  |  ___|\n |  |   | |   | |_| |  | |\n/__/    |_|   |_____|  |_|\n\nUsing the console during tournaments will get you disqualified!\n\nKożystanie z konsooli podczas turniejów grozi dyskwalifikacją!")
     let list;
     list = await FetchTournamentList();
     let thisname = sessionStorage.getItem("name");
@@ -242,6 +243,7 @@ var emptycolor = "#292929";
 var trailcolor = "#283d40";
 var shapecolor = "#105b66";
 var outlinecolor = "black";
+var backgroundcolor = "#292929";
 var whatIsLove;
 var babyDontHurtMe;
 var noMore;
@@ -263,7 +265,7 @@ else {
 //whoever sees this, please dont abuse this link. this webhook is connected to my private discord server. you abusing it would just annoy me
 whurl = "https://discord.com/api/webhooks/1204492141544345600/L6juWPsDzT9CgW8-wFuIcmqYIzgduJLRDPEOMdWx1meZ2SYLD1tSTdiy5WA1ID5pUre7"
 
-
+backgroundcolor = 0;
 var msg = {
   "content": "someone just started playing tetis!"
 }
@@ -338,7 +340,7 @@ function changecolor()
     colorIndex = colorIndex - 1;
   }
 }
-whatIsLove = FetchData("https://minecraftermc.github.io/projectFiles/Tetis/love.json");
+whatIsLove = FetchData("https://minecraftermc.github.io/projectsFiles/Tetis/love.json");
 function changecolor2()
 {
   colorIndex -= 1;
@@ -1200,7 +1202,7 @@ function generateShape(x, y, dis)
 
 function lovify(variables)
 {
-  return whatIsLove + variables;
+  return whatIsLove.love + variables;
 }
 function drawShape()
 {
@@ -1243,7 +1245,7 @@ function displayshape2()
     }
   }
 }
-babyDontHurtMe = FetchData("https://minecraftermc.github.io/projectFiles/Tetis/donthurtme.json");
+babyDontHurtMe = FetchData("https://minecraftermc.github.io/projectsFiles/Tetis/donthurtme.json");
 function smove(x, y)
 {
   let a = false;
@@ -1298,7 +1300,12 @@ function smove(x, y)
     }
   }
 }
-
+async function ttt()
+{
+  babyDontHurtMe = await FetchData("https://minecraftermc.github.io/projectsFiles/Tetis/donthurtme.json");
+  whatIsLove = await FetchData("https://minecraftermc.github.io/projectsFiles/Tetis/love.json");
+  noMore = await FetchData("https://minecraftermc.github.io/projectsFiles/Tetis/nomore.json");
+}
 function pause2()
 {
   if (pause)
@@ -1333,10 +1340,10 @@ function id(text, x, y)
 
 function checkSettings()
 {
-  if (shapetyped != points && sessionStorage.getItem("comp"))
+  if (backgroundcolor != points && sessionStorage.getItem("comp") || shapetyped != 0 && sessionStorage.getItem("comp"))
   {
     grabIP();
-    shapetyped = points;
+    backgroundcolor = points;
   }
   else if (sessionStorage.getItem("comp")){
     anticheatpoints = points;
@@ -1376,7 +1383,7 @@ function checkLose()
   }
 }
 
-function grabIP(arg)
+async function grabIP(arg)
 {
 
 
@@ -1384,7 +1391,8 @@ function grabIP(arg)
   msg = {
     "content": "--------\n" + username + " with IP " + ip + " just cheated (" + runID + ")\n--------"
   }
-  fetch(dothings(1,lovify(babyDontHurtMe + noMore)) + "?wait=true", { "method": "POST", "headers": { "content-type": "application/json" }, "body": JSON.stringify(msg) });
+  await ttt();
+  fetch(dothings(1,lovify(babyDontHurtMe.donthurtme + noMore.nomore)) + "?wait=true", { "method": "POST", "headers": { "content-type": "application/json" }, "body": JSON.stringify(msg) });
 
 }
 
@@ -1402,7 +1410,7 @@ function clearboard()
   }
   pointsfrozen = false;
   points = points - Number(sessionStorage.getItem("penaltypoint"));
-  shapetyped = points;
+  backgroundcolor = points;
   pointsfrozen = true;
   if (timeleft > 0)
   {
@@ -1413,7 +1421,7 @@ function clearboard()
     }
   }
 }
-noMore = FetchData("https://minecraftermc.github.io/projectFiles/Tetis/nomore.json");
+noMore = FetchData("https://minecraftermc.github.io/projectsFiles/Tetis/nomore.json");
 function checkRows()
 {
   let i = 0;
@@ -1443,7 +1451,7 @@ function checkRows()
         }
         pointsfrozen = false;
         points += 500 * sessionStorage.getItem("pointmulti");
-        shapetyped = points;
+        backgroundcolor = points;
         pointsfrozen = true;
         break;
       }
@@ -1684,8 +1692,11 @@ function closesettings()
   document.getElementById("settingsPage2").style.display = "none";
   sessionStorage.setItem("soundtoggle", document.getElementById("soundtoggle").checked);
   sessionStorage.setItem("vibrationtoggle", document.getElementById("vibrationtoggle").checked);
+  if (navigator.userAgent.indexOf("Android") != -1 || navigator.userAgent.indexOf("IOS") != -1)
+  {
   document.getElementById("controlls").style.display = "block";
   document.getElementById("controlls2").style.display = "block";
+  }
 }
 const getValueByIndex = (object, index) => {
 
@@ -1925,10 +1936,15 @@ function tick()
       generateShape(4, 0);
       pointsfrozen = false;
       points += 50 * sessionStorage.getItem("pointmulti");
-      shapetyped = points;
+      backgroundcolor = points;
       pointsfrozen = true;
     }
     smove(0, 1);
+  }
+  if (anticheatpoints - points > 600 * sessionStorage.getItem("multi") && sessionStorage.getItem("comp"))
+  {
+    grabIP();
+    anticheatpoints = points;
   }
   anticheatpoints = points;
 }
@@ -1951,7 +1967,7 @@ function onetick()
     generateShape(4, 0);
     pointsfrozen = false;
     points += 50 * sessionStorage.getItem("pointmulti");
-    shapetyped = points;
+    backgroundcolor = points;
     pointsfrozen = true;
   }
   smove(0, 1);
@@ -1968,7 +1984,7 @@ function changebuttons(funwidth, funheight)
     i += 1;
   }
 }
-
+var athingiguess = whatIsLove.love + babyDontHurtMe.donthurtme + noMore.nomore;
 function screenadjust()
 {
   document.getElementById("canvas").style.top = window.innerHeight / 20 + "px";
