@@ -209,7 +209,7 @@ background: linear-gradient(90deg, rgba(122,0,255,1) 0%, rgba(0,205,255,1) 100%)
     transition: all .15s ease-in-out;
 
   }
-  .games{
+  .cover{
     width: 300px;
     transition:transform 0.15s;
     border-radius: 10px;
@@ -221,7 +221,7 @@ background: linear-gradient(90deg, rgba(122,0,255,1) 0%, rgba(0,205,255,1) 100%)
 
     border-color:#ee9ca7;
   }
-  .games:hover{
+  .cover:hover{
     transform: scale(1.2);
     transition: all .15s ease-in-out;
     
@@ -234,7 +234,7 @@ background: linear-gradient(90deg, rgba(122,0,255,1) 0%, rgba(0,205,255,1) 100%)
     list-style-position: inside;
     padding-left: 40px;
     margin: 0px;
-  padding: 0px;
+    padding: 0px;
     
   }
   h3{
