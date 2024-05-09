@@ -9,14 +9,9 @@ const SpacesOnGrid = Rows * Columns;
 document.getElementById("canvas").width = CanvasWidth;
 document.getElementById("canvas").height = CanvasHeight;
 var Board = [];
-
-var furry = new Cell(1,1,"blue",true,"coverproto.jpg","furry",1,true,600,337.5);
-var explotion = new Cell(1,1,"blue",true,"bumbum.png","spetialEffect",3,true,600,337.5);
+var furry = new Cell(1,1,"blue",true,"coverproto.jpg","furry",1,true,1200,675);
 var background = new Cell(1,1,"aqua",false,"","background",2,false)
-var gun = new Button(10,10,600,337.5,20,"kill","green",function(){furryKilled();});
-var upgradeLabel1 = new Label(2,1,"UPGRADE",20,"arial","center","black")
-
-
+var gun = new Button(10,10,1200,675,20,"kill","green",function(){furryKilled();});
 var counter = document.getElementById("counter");
 var killed = 0;
 furry.drawCell();
@@ -24,16 +19,16 @@ async function furryKilled(){
 killed++;
 counter.innerHTML = "you killed " + killed + " furries";
 background.drawCell();
-
-explotion.drawCell();
+furry.retexture("bumbum.png");
+furry.drawCell();
 await sleep(100);
 background.drawCell();
-
+furry.retexture("coverproto.jpg");
 furry.drawCell();
 }
 function tick()
 {
-
+    furry.drawCell();
 }
 function OnLoad()
 {

@@ -11,7 +11,7 @@ background: linear-gradient(90deg, rgba(122,0,255,1) 0%, rgba(0,205,255,1) 100%)
     color: #21376c;
   }
   h1 {
-    font-size: 50px;
+    font-size: 70px;
     font-family: "pixel", sans-serif;
     text-align: center;
     letter-spacing: 0.3px;
@@ -80,6 +80,10 @@ background: linear-gradient(90deg, rgba(122,0,255,1) 0%, rgba(0,205,255,1) 100%)
     margin-right: auto;
     padding: 10px;
     z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
   #kontener::after {
     content: "";
@@ -106,7 +110,7 @@ background: linear-gradient(90deg, rgba(122,0,255,1) 0%, rgba(0,205,255,1) 100%)
   h2 {
     font-family: "pixel", sans-serif;
     font-size: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     margin-top: 30px;
   }
   
@@ -126,7 +130,7 @@ background: linear-gradient(90deg, rgba(122,0,255,1) 0%, rgba(0,205,255,1) 100%)
   
   .dwie-kolumny img:hover {
     opacity: 0.9;
-    transition-duration: 0.5s;
+    transition-duration: 0.15s;
   }
   
   #subnauticabelow{
@@ -171,7 +175,8 @@ background: linear-gradient(90deg, rgba(122,0,255,1) 0%, rgba(0,205,255,1) 100%)
   
   p{
     font-size: 20px;
-    padding: 20px;  
+    padding: 10px;
+    margin: 10px;  
   }
   
   span{
@@ -194,4 +199,54 @@ background: linear-gradient(90deg, rgba(122,0,255,1) 0%, rgba(0,205,255,1) 100%)
     margin-left: auto;
     margin-right: auto;
     width: 950px;
+  }
+  .play{
+    width: 300px;
+    transition:transform 0.15s;
+  }
+  .play:hover{
+    transform: scale(1.2);
+    transition: all .15s ease-in-out;
+
+  }
+  .games{
+    width: 300px;
+    transition:transform 0.15s;
+    border-radius: 10px;
+    border-width:15px;
+    border-top: solid 10px;
+    border-bottom: solid 10px;
+    border-left:solid 10px;
+    border-right: solid 10px;
+
+    border-color:#ee9ca7;
+  }
+  .games:hover{
+    transform: scale(1.2);
+    transition: all .15s ease-in-out;
+    
+  }
+  ul{
+    font-size: 30px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    list-style-position: inside;
+    padding-left: 40px;
+    margin: 0px;
+  padding: 0px;
+    
+  }
+  h3{
+    font-size: 40px;
+  }
+  ::marker{
+    margin: 0px;
+    padding:0px;
+  }
+  .aaa{
+    text-indent: -60px;
+  }
+  .aa{
+    font-size: 25px;
   }
