@@ -27,7 +27,7 @@ background: linear-gradient(90deg, rgba(122,0,255,1) 0%, rgba(0,205,255,1) 100%)
     margin-right: auto;
     background-color: #5fedeb;
     list-style-type: none;
-    border-radius: 0px;
+    border-radius: 18px;
     position: sticky;
     top: 5px;
     z-index: 20;
