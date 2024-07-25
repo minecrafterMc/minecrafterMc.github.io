@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Tetis Editor</title>
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="loading">
+    <h1>Loading...</h1>
+  </div>
+  <div id="guide">
+    <button id="guide-close" onclick="getE('guide').style.display = 'none'">close</button>
+    <h3 id="guide-title">lorem ipsum</h3>
+    <p id="guide-desc">dolor sit amet</p>
+    </div>
+  <button onclick="openFile()" class="down" >Load From File</button><!--<button class="add" style="height: 40px;">Load From URL</button>-->
+  <h3>Main</h3>
+  <div class="main">
+    <table>
+      <tr>
+        <td class="main-t-l">
+          <input type=text id="name" placeholder="Name">
+        </td>
+        <td class="main-t-r">
+          <img src="info.png" onclick="displayInfo('name')">
+        </td>
+      </tr>
+      <tr>
+  <td class="main-t-l">
+    <input type=text id="author" placeholder="Author">
+  </td>
+  <td class="main-t-r">
+    <img src="info.png" onclick="displayInfo('author')">
+  </td>
+</tr>
+      <tr>
+  <td class="main-t-l">
+    <input type=text id="desc" placeholder="Description">
+  </td>
+  <td class="main-t-r">
+    <img src="info.png" onclick="displayInfo('desc')">
+  </td>
+</tr>
+<tr>
+  <td class="main-t-l">
+    <input min="-1" type="number" id="time" placeholder="Time limit">
+  </td>
+  <td class="main-t-r">
+    <img src="info.png" onclick="displayInfo('time')">
+  </td>
+</tr>
+<tr>
+  <td class="main-t-l">
+    <input min="0" type="number" id="speed" placeholder="Speed">
+  </td>
+  <td class="main-t-r">
+    <img src="info.png" onclick="displayInfo('speed')">
+  </td>
+</tr>
+<tr>
+  <td class="main-t-l">
+    <input min="-1" type="number" id="lives" placeholder="Lives (0 for infinite)">
+  </td>
+  <td class="main-t-r">
+    <img src="info.png" onclick="displayInfo('lives')">
+  </td>
+</tr>
+<tr>
+  <td class="main-t-l">
+    <input type="number" id="ppenalty" placeholder="Point penalty for losing a life">
+  </td>
+  <td class="main-t-r">
+    <img src="info.png" onclick="displayInfo('ppenalty')">
+  </td>
+</tr>
+<tr>
+  <td class="main-t-l">
+    <input type="number" id="tpenalty" placeholder="Time penalty for losing a life">
+  </td>
+  <td class="main-t-r">
+    <img src="info.png" onclick="displayInfo('tpenalty')">
+  </td>
+</tr>
+<tr>
+  <td class="main-t-l">
+    <input min="0" type="number" id="multi" placeholder="Point multiplier">
+  </td>
+  <td class="main-t-r">
+    <img src="info.png" onclick="displayInfo('multi')">
+  </td>
+</tr>
+    </table>
+  </div>
+  <h3>Colors</h3>
+  <button class="add" onclick="addNewColor()">Add</button><button class="remove" onclick="removeColor()">Remove</button>
+  <br>
+  <br>
+  <div id="colors">
+    
+  </div>
+  <h3>Shapes</h3>
+  <button id="replace" onclick="addDefaultShapes();">replace your shapes with default</button><br><br>
+  <button class="add" onclick="addCompleteShape()">Add</button><button class="remove" onclick="removeShape()">Remove</button>
+  <br>
+  <br>
+  <div id="blocks"></div>
+  <br>
+  <h3>Mods</h3>
+
+  <button id="mod" onclick="toggleMods()">Enable/Disable mods</button>
+  <br>
+  <br>
+  <div id="mods">
+    
+  <input class="mo" placeholder="On load" id="onLoad">
+  <input class="mo" placeholder="Every tick" id="tick">
+  <input class="mo" placeholder="On block fall" id="onBlockFall">
+  <input class="mo" placeholder="On line cleared" id="onLineCleared">
+  <input class="mo" placeholder="On live loss" id="onLooseLife">
+  <input class="mo" placeholder="On player death" id="onDeath">
+  </div>
+  <br>
+  <br>
+  <button class="down" onclick="compile()">Download</button>
+  <script src="main.js"></script>
+</body>
+</html>
