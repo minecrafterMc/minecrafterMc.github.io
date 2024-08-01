@@ -5,112 +5,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
-  <style>
-    body{
-      background: rgb(121,0,255);
-background: radial-gradient(circle, rgba(121,0,255,1) 0%, rgba(39,44,197,1) 16%, rgba(50,63,180,1) 30%, rgba(67,91,200,1) 50%, rgba(62,110,232,1) 63%, rgba(87,141,237,1) 78%, rgba(0,206,255,1) 100%);
-      color: white;
-    }
-    button{
-      background-color: #f3ff08;
-      color: black;
-      width: 130px;
-      height: 65px;
-    }
-    .tournament{
-   background-color: #f27272;
-    }
-  </style>
 </head>
 
 <body>
-  <center>
-  <img width="350" src="TetisLogo.png"><br><p>Now with custom modes!</p><br><br><br>
-  <button onclick="startcustommode(-1,250,'classic',1,1,0,0)">Play Classic</button><br><br><br><br><br>
-  <button onclick="window.location.href = 'bonusselect.html'" style="background-color: #a103fc; color: white;">Bonus Modes</button><br><br><br><br><br>
-  <button style="background-color: #a103fc; color: white;">Mode Editor<br>(coming soon)</button>
-  </center>
-  <script>
-    function startcustommode(time, speed, name, lives, multi, pointpenalty, timepenalty, comp) {
-        sessionStorage.setItem("gamedata", JSON.stringify(
-          {
-            "name": name,
-            "time": time,
-            "updateTimer": speed,
-            "lives": lives,
-            "multi": multi,
-            "ppenalty": pointpenalty,
-            "tpenalty": timepenalty,
-            "colors": [
-              {
-                "name": "default",
-                "shapecolor": "#fc0303",
-                "emptycolor": "#039dfc",
-                "trailcolor": "#0877ff",
-                "fallencolor": "#ababab",
-                "textcolor": "white"
+  wait...
+<script>
+const queryString = window.location.search;
+
+const urlParams = new URLSearchParams(queryString);
+var gamedata = { "colors": [
+   {
+     "name": "default",
+     "shapecolor": "#fc0303",
+     "emptycolor": "#039dfc",
+     "trailcolor": "#0877ff",
+     "fallencolor": "#ababab",
+     "textcolor": "white"
 
               },
-              {
-                "name": "ocean",
-                "shapecolor": "cyan",
-                "emptycolor": "darkblue",
-                "trailcolor": "lightblue",
-                "fallencolor": "grey",
-                "textcolor": "white"
+   {
+     "name": "ocean",
+     "shapecolor": "cyan",
+     "emptycolor": "darkblue",
+     "trailcolor": "lightblue",
+     "fallencolor": "grey",
+     "textcolor": "white"
               },
-              {
-                "name": "blue light mode",
-                "shapecolor": "cyan",
-                "emptycolor": "white",
-                "trailcolor": "lightblue",
-                "fallencolor": "grey",
-                "textcolor": "blue"
+   {
+     "name": "blue light mode",
+     "shapecolor": "cyan",
+     "emptycolor": "white",
+     "trailcolor": "lightblue",
+     "fallencolor": "grey",
+     "textcolor": "blue"
               },
-              {
-                "name": "ultra dark mode",
-                "shapecolor": "darkgrey",
-                "emptycolor": "black",
-                "trailcolor": "grey",
-                "fallencolor": "lightgrey",
-                "textcolor": "white"
+   {
+     "name": "ultra dark mode",
+     "shapecolor": "darkgrey",
+     "emptycolor": "black",
+     "trailcolor": "grey",
+     "fallencolor": "lightgrey",
+     "textcolor": "white"
               },
-              {
-                "name": "matrix",
-                "shapecolor": "green",
-                "emptycolor": "black",
-                "trailcolor": "lime",
-                "fallencolor": "darkgreen",
-                "textcolor": "white"
+   {
+     "name": "matrix",
+     "shapecolor": "green",
+     "emptycolor": "black",
+     "trailcolor": "lime",
+     "fallencolor": "darkgreen",
+     "textcolor": "white"
               },
-              {
-                "name": "blue dark mode",
-                "shapecolor": "darkblue",
-                "emptycolor": "black",
-                "trailcolor": "blue",
-                "fallencolor": "grey",
-                "textcolor": "white"
+   {
+     "name": "blue dark mode",
+     "shapecolor": "darkblue",
+     "emptycolor": "black",
+     "trailcolor": "blue",
+     "fallencolor": "grey",
+     "textcolor": "white"
               },
-              {
+   {
 
-                "name": "amogus",
-                "shapecolor": "red",
-                "emptycolor": "grey",
-                "trailcolor": "grey",
-                "fallencolor": "white",
-                "textcolor": "white"
+     "name": "amogus",
+     "shapecolor": "red",
+     "emptycolor": "grey",
+     "trailcolor": "grey",
+     "fallencolor": "white",
+     "textcolor": "white"
               },
-              {
+   {
 
-                "name": "1.5",
-                "shapecolor": "#105b66",
-                "emptycolor": "#292929",
-                "trailcolor": "#283d40",
-                "fallencolor": "#092529",
-                "textcolor": "white"
+     "name": "1.5",
+     "shapecolor": "#105b66",
+     "emptycolor": "#292929",
+     "trailcolor": "#283d40",
+     "fallencolor": "#092529",
+     "textcolor": "white"
               }
             ],
-            "blocks": [
+ "blocks": [
               [
                 false, false, false, false, false, true, false, false, false, true, true, false, false, true, false, false, 1, 2, 1, 3
               ],
@@ -199,30 +171,28 @@ background: radial-gradient(circle, rgba(121,0,255,1) 0%, rgba(39,44,197,1) 16%,
                 true, true, false, false, false, true, false, false, false, true, false, false, false, false, false, false, 0, 1, 0, 2
               ]
             ],
-    "enableMods": false,
-    "tick": "",
-    "onLoad": "",
-    "onBlockFall": "",
-    "onLineCleared": "",
-    "onDeath": ""
-          }));
+ "enableMods": false,
+ "tick": "",
+ "onLoad": "",
+ "onBlockFall": "",
+ "onLineCleared": "",
+ "onDeath": ""
+ }
+  if (urlParams.has('name'))
 
-        sessionStorage.setItem("comp", comp);
-        window.location.href = '5min.html';
-      }
-if (sessionStorage.getItem("colorid") == undefined)
 {
-  sessionStorage.setItem("colorid", 0);
+  gamedata.name = urlParams.getAll("name");
+  gamedata.time = urlParams.getAll("time");
+  gamedata.updateTimer = urlParams.getAll("speed");
+  gamedata.lives = urlParams.getAll("lives");
+  gamedata.multi = urlParams.getAll("multi");
+  gamedata.ppenalty = urlParams.getAll("ppenalty");
+  gamedata.tpenalty = urlParams.getAll("tpenalty");
+  
 }
-if (sessionStorage.getItem("soundtoggle") == undefined)
-{
-  sessionStorage.setItem("soundtoggle", true);
-}
-if (sessionStorage.getItem("vibrationtoggle") == undefined)
-{
-  sessionStorage.setItem("vibrationtoggle", false);
-}
-  </script>
+sessionStorage.setItem("gamedata",JSON.stringify(gamedata));
+location.href = "https://minecraftermc.github.io/Tetis/5min.html";
+</script>
 </body>
 
 </html>

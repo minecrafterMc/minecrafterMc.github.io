@@ -1,0 +1,133 @@
+@font-face {
+  font-family: RaidenFromMetalGearRising;
+  src: url(Marksman.otf);
+}
+html{
+  font-family: RaidenFromMetalGearRising, monospace;
+}
+body {
+    font-size: 25px;
+    font-family: RaidenFromMetalGearRising, monospace;
+}
+input[type=text],input[type=number],.mo{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 12px 0;
+  display: inline-block;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input:hover{
+  background-color: #c7c7c7;
+}
+input[type=color]{
+  width: 150px;
+  height: 150px;
+  
+}
+input[type=color]:hover{
+  cursor: pointer;
+}
+img{
+  /*width: 100%;*/
+  margin-top: 0px;
+  /*padding: 0px 20px;
+margin: 0px 0;*/
+height: 60px;
+display: inline-block;
+}
+img:hover{
+  cursor: pointer;
+}
+button:hover{
+  cursor: pointer;
+}
+.main-t-l{
+  width: 95%;
+}
+.main-t-r{
+  width: 5%;
+}
+div{
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.add, .down{
+  background-color: #27db66;
+  border: 0px;
+  border-radius: 15px;
+  font-family: RaidenFromMetalGearRising;
+  width: 120px;
+  height: 20px;
+  font-size: 20px;
+  margin-right: 10px;
+}
+.down{
+  display: inline-block;
+  width: 100%;
+  height: 50px;
+  font-size: 48px;
+}
+.add:hover,.down:hover{
+  background-color: #209e4c;
+}
+.remove{
+  background-color: #ff2626;
+  border: 0px;
+  border-radius: 15px;
+  font-family: RaidenFromMetalGearRising;
+  width: 120px;
+  height: 20px;
+  font-size: 20px;
+}
+.remove:hover{
+  background-color: #c73434;
+}
+#replace{
+  background-color: #c9bf00;
+border: 0px;
+border-radius: 15px;
+font-family: RaidenFromMetalGearRising;
+width: 170px;
+height: 40px;
+font-size: 20px;
+}
+#replace:hover{
+  background-color: #8a7700;
+}
+#mod{
+  background-color: #27db66;
+  border: 0px;
+  border-radius: 15px;
+  font-family: RaidenFromMetalGearRising;
+  width: 200px;
+  height: 50px;
+  font-size: 20px;
+  
+}
+#guide{
+  position: fixed;
+  display: none;
+  border-radius: 10px;
+  background-color: #979797;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  text-align: center;
+}
+#loading{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: grey;
+  margin: 0px;
+  left: 0px;
+  top: 0px;
+  border-radius: 0px;
+  display: none;
+}

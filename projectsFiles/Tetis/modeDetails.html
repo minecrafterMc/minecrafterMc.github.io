@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+    body{
+      background: rgb(121,0,255);
+background: radial-gradient(circle, rgba(121,0,255,1) 0%, rgba(39,44,197,1) 16%, rgba(50,63,180,1) 30%, rgba(67,91,200,1) 50%, rgba(62,110,232,1) 63%, rgba(87,141,237,1) 78%, rgba(0,206,255,1) 100%);
+      color: white;
+      height: 100%;
+    }
+    button{
+      background-color: #f3ff08;
+      color: black;
+      width: 130px;
+      height: 65px;
+    }
+    .navigation{
+      background-color: #a103fc;
+      color: white;
+    }
+    .tournament{
+   background-color: #f27272;
+    }
+
+  </style>
+</head>
+
+<body>
+  <center>
+  <img width="350" src="TetisLogo.png"><br>
+  <h1 id="title"></h1>
+  <h2 id="desc"></h2>
+  <h3 id="author"></h3>
+  <h2 id="details"></h2>
+  <button onclick="location.href = '5min.html'">Play</button><br><br>
+  <button onclick="location.href = 'bonusselect.html'">Back</button>
+  </center>
+  <script>
+    if(sessionStorage.getItem("gamedata") === null){
+      window.location.href = "bonusselect.html"
+    }
+    else{
+      
+    }
+    var data = sessionStorage.getItem("gamedata");
+    data = JSON.parse(data)
+    function getE(element){
+      return document.getElementById(element);
+    }
+    getE("title").innerHTML = data.name;
+    getE("desc").innerHTML = data.desc;
+    getE("author").innerHTML = "by: " + data.author;
+    getE("details").innerHTML = "speed: " + data.updateTimer + "<br>Time Limit: " + data.time + "<br>lives: " + data.lives + "<br>point multiplier: " + data.multi+"<br>mods: ";
+    if(data.mods){
+      getE("details").innerHTML += "enabled";
+    }
+    else{
+      getE("details").innerHTML += "disabled";
+    }
+  </script>
+</body>
+
+</html>
