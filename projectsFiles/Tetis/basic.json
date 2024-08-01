@@ -1,92 +1,13 @@
-document.getElementById("speed").style.display = "none";
-document.getElementById("time").style.display = "none";
-document.getElementById("custom").style.display = "none";
-document.getElementById("featured").style.display = "none";
-document.getElementById("customeditor").style.display = "none";
-function openfeatured()
 {
-  document.getElementById("custom").style.display = "none";
-  document.getElementById("time").style.display = "none";
-  document.getElementById("featured").style.display = "block";
-  document.getElementById("speed").style.display = "none";
-  document.getElementById("customeditor").style.display = "none";
-}
-function openspeed()
-{
-  document.getElementById("custom").style.display = "none";
-  document.getElementById("time").style.display = "none";
-  document.getElementById("featured").style.display = "none";
-  document.getElementById("speed").style.display = "block";
-  document.getElementById("customeditor").style.display = "none";
-}
-function opentime()
-{
-  document.getElementById("custom").style.display = "none";
-  document.getElementById("time").style.display = "block";
-  document.getElementById("speed").style.display = "none";
-  document.getElementById("featured").style.display = "none";
-  document.getElementById("customeditor").style.display = "none";
-}
-function opencustom()
-{
-  document.getElementById("custom").style.display = "block";
-  document.getElementById("time").style.display = "none";
-  document.getElementById("speed").style.display = "none";
-  document.getElementById("featured").style.display = "none";
-  document.getElementById("customeditor").style.display = "block";
-}
-function openall()
-{
-  document.getElementById("custom").style.display = "block";
-  document.getElementById("time").style.display = "block";
-  document.getElementById("speed").style.display = "block";
-  document.getElementById("featured").style.display = "block";
-  document.getElementById("customeditor").style.display = "block";
-}
-function closeall()
-{
-  document.getElementById("custom").style.display = "none";
-  document.getElementById("time").style.display = "none";
-  document.getElementById("featured").style.display = "none";
-  document.getElementById("speed").style.display = "none";
-  document.getElementById("customeditor").style.display = "none";
-}
-function openFileSelector()
-{
-  let input = document.createElement('input');
-input.type = 'file';
-input.onchange = e => { 
-   let file = e.target.files[0]; 
-   var reader = new FileReader();
-   reader.readAsText(file,'UTF-8');
-   reader.onload = readerEvent => {
-      let content = readerEvent.target.result;
-      startFromFile(content,false);
-   }
-
-}
-
-input.click();
-}
-function startFromFile(gamedata,comp)
-{
-  sessionStorage.setItem("gamedata",gamedata);
-  sessionStorage.setItem("comp",comp);
-  location.href = "modeDetails.html";
-}
-function startcustommode(time,speed,name,lives,multi,pointpenalty,timepenalty,comp,desc,author)
-{
-  sessionStorage.setItem("gamedata",JSON.stringify(
-    {
-    "name": name,
-    "desc": desc,
-    "author": author,
-    "time": time,
-    "updateTimer": speed,
-    "lives": lives,
-    "multi": multi,
-    "ppenalty": pointpenalty,
-    "tpenalty": timepenalty,
+    "name": "classic",
+    "desc": "a classic mode",
+    "author": "Cloudy Games",
+    "time": -1,
+    "updateTimer": 250,
+    "lives": 1,
+    "multi": 1,
+    "ppenalty": 0,
+    "tpenalty": 0,
     "colors": [
   {
     "name": "default",
@@ -246,16 +167,10 @@ function startcustommode(time,speed,name,lives,multi,pointpenalty,timepenalty,co
         ]
     ],
     "enableMods": false,
-    "tick": "",
     "onLoad": "",
+    "tick": "",
     "onBlockFall": "",
+    "onLineCleared": "",
     "onDeath": ""
-}));
-  
-  sessionStorage.setItem("comp", comp);
-  window.location.href = 'modeDetails.html';
-}
-if (sessionStorage.getItem("colorid") == undefined)
-{
-  sessionStorage.setItem("colorid", 0);
+    
 }

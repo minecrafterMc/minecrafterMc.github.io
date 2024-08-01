@@ -17,8 +17,12 @@
         <h2 id="loosepoints"></h2>
         <button onclick="location.reload();">try again</button><br><br>
         <button onclick="window.location.href = 'index.html'">Back To Main Menu</button><br><br>
-        <button onclick="window.location.href = 'bonusselect.html'">To Bonus Mode Selection</button>
+        <button onclick="window.location.href = 'bonusselect.html'">To Bonus Mode Selection</button><br><br>
+        <button onclick="downloadObjectAsJson(gamedata,gamedata.name);">Download mode to file</button>
+
+        <button onclick="copyurl();">Copy mode url to clipboard</button>
         </center>
+     </center>
       </div>
       <!--<button onclick="print()" id="print">print</button>-->
         <center>
@@ -36,8 +40,8 @@
               </div>
                 <!--<td>-->
                   
-        <canvas id="canvas" height="605" width="305">test</canvas>
-        <canvas id="2display" height="110" width="110"></canvas>
+        <canvas id="canvas" height="605" width="305"></canvas>
+        <canvas style="" id="2display" height="110" width="110"></canvas>
         <img src="settings.svg" id="settings" onclick="opensettings()"/>
         <p id="timer"></p>
         
