@@ -118,6 +118,13 @@
               </script>
         </div>
     </div>
+    <div id="phoneNumber">
+        <h1>Phone number</h1>
+        <div id="phoneNumber-slider" class="section">
+            <p id="phoneNumber-slider-output"></p>
+            <input type="range" min="100000000" max="999999999" value="100000000"id="phoneNumber-slider-input" oninput="document.getElementById('phoneNumber-slider-output').innerText = this.value">
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
