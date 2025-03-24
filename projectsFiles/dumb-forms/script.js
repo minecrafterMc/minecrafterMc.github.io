@@ -1,16 +1,27 @@
+function flipCheck(id){
+    if (document.getElementById(id).checked == undefined){
+        document.getElementById(id).checked = true;
+    }
+    else{
+        document.getElementById(id).checked = !document.getElementById(id).checked;
+    }
+}
 var checkboxcontainer = document.getElementById("volume-checkboxes")
 for (let i = 1;i<101;i++){
     let checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.className = "volume-checkbox";
+    checkbox.id = "checkbox-" + (i-1) % 10 + "-" + Math.floor((i-1) / 10);
     checkbox.onclick = () => {
-        if (checkbox.checked){
-            volume++;
-        }
-        else{
-            volume--;
-        }
-        update();
+        if (((i-1)%10)-1 >=0)
+            flipCheck("checkbox-" + (((i-1)%10)-1) +"-" + Math.floor((i-1) / 10));
+        if (((i-1)%10)+1 < 10)
+        flipCheck("checkbox-" + (((i-1)%10)+1) +"-" + Math.floor((i-1) / 10));
+        if (Math.floor((i-1) / 10)-1 >= 0)
+        flipCheck("checkbox-" + ((i-1)%10) +"-" + (Math.floor((i-1) / 10)-1));
+        if (Math.floor((i-1) / 10)+1 < 10)
+        flipCheck("checkbox-" + ((i-1)%10) +"-" + (Math.floor((i-1) / 10)+1));
+        updateCheckboxVolume();
     };
     checkboxcontainer.appendChild(checkbox);
     if (i % 10 == 0){
@@ -18,6 +29,16 @@ for (let i = 1;i<101;i++){
     }
 }
 
+function updateCheckboxVolume(){
+    volume = 0;
+    let checkboxes = document.getElementsByClassName("volume-checkbox");
+    for (let i = 0;i<checkboxes.length;i++){
+        if (checkboxes[i].checked){
+            volume++;
+        }
+    }
+    update();
+}
 function resetCheckboxes(){
     volume = 0;
     let checkboxes = document.getElementsByClassName("volume-checkbox");
