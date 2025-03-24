@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dumb form</title>
+    <style>
+        .section{
+            border: 3px solid black;
+            border-radius: 20px;
+            padding: 8px;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <script src="phaser.js"></script>
+    <div id="volume">
+        <h1>Volume</h1>
+        <div id="volume-random" class="section">
+            <p class="volume-output">Volume: 0</p>
+            <button onclick="volume = RandomInt(0,100);update()">Set volume</button>
+        </div>
+        <div id="volume-hold" class="section">
+            <p class="volume-output">Volume: 0</p>
+            <progress value="0" max="100" class="volume-progressBar"></progress>
+            <button onmousedown="startVolumeHoldDown();" onmouseup="stopVolumeHoldDown()">Hold down</button>
+        </div>
+        <div id="volume-checkboxes" class="section">
+            <p class="volume-output">Volume: 0</p>  
+            <button onclick="resetCheckboxes()">Reset Checkboxes</button><br>
+        </div>
+        <div id="volume-target" class="section">
+            <p class="volume-output">Volume: 0</p>
+            
+            <script>
+                const devSettings = {
+                  hitboxOpacity: 0,
+                };
+                var config = {
+                    parent: "volume-target",
+                  type: Phaser.AUTO,
+                  width: 800,
+                  height: 400,
+                  physics: {
+                      default: 'arcade',
+                      arcade: {
+                          gravity: { y: 300 },
+                          debug: false
+                      }
+                  },
+                  scene: {
+                    preload: preload,
+                    create: create,
+                    update: update,
+                  },
+                };
+                var game = new Phaser.Game(config);
+                function RandomInt(min, max) {
+                  min = Math.ceil(min);
+                  max = Math.floor(max);
+                  return Math.floor(Math.random() * (max - min + 1) + min);
+                }
+                function preload() {
+                    this.load.image('volUp','volumeup.png');
+                    this.load.image('volDown','volumedown.png');
+                }
+                
+                function create() {
+                  scene = this;
+                    
+                }
+          
+                function update() {
+                  if(RandomInt(1,100) == 1){
+                    let object;
+                    switch (RandomInt(1,2)){
+                        
+                        case 1:
+                            object = scene.physics.add.sprite(RandomInt(100,700),RandomInt(100,200),'volUp').setScale(0.2);
+                            object.setCollideWorldBounds(true);
+                            object.setVelocityX(RandomInt(-100,100));
+                            object.setBounceX(1);
+                            object.setBounceY(1);
+                            object.setInteractive();
+                            object.on('pointerdown', function(){
+                                if(volume + 5 < 101){
+                                volume += 5;
+                                update();
+                            }
+                                object.destroy();
+                            });
+                            setTimeout(() => {
+                                object.destroy();
+                            }, 5000);
+                            break;
+                        case 2:
+                        object = scene.physics.add.sprite(RandomInt(100,700),RandomInt(100,200),'volDown').setScale(0.2);
+                        object.setCollideWorldBounds(true);
+                        object.setVelocityX(RandomInt(-100,100));
+                        object.setBounceX(1);
+                        object.setBounceY(1);
+                        object.setInteractive();
+                        object.on('pointerdown', function(){
+                            if(volume - 5 > 0){
+                            volume -= 5;
+                            update();
+                        }
+                            object.destroy();
+                        });
+                        setTimeout(() => {
+                            object.destroy();
+                        }, 5000);
+                        break;
+                    }
+                  }
+                }
+              </script>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
