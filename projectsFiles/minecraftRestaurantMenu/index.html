@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img{
+            margin: 0px;
+            padding: 0px;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        html, body {
+            height: 100%;
+        }
+        </style>
+</head>
+<body>
+    <img id="image" src="images/image1.png" alt="A descriptive text about the photo">
+    <script>
+        const img = document.getElementById('image');
+        const imageCount = 2;
+        var currentImage = 1;
+        function changeImage() {
+            currentImage ++;
+            if (currentImage > imageCount) {
+                currentImage = 1;
+            }
+            img.src = `images/image${currentImage}.png`;
+        }
+        setInterval(changeImage, 10000);
+    </script>
+</body>
+</html>
